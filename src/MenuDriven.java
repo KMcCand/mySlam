@@ -1,33 +1,34 @@
 //package mySlam;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Random;
 import java.util.ArrayList;
-
 import java.util.Scanner;
+
 public class MenuDriven {
 	
 	private static Scanner userinput;
-	public static ArrayList<Player> Association = new ArrayList<Player>();
+	public static ArrayList<Player> association = new ArrayList<Player>();
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner userinput = new Scanner(System.in);
-		int option = 1;
+		
 		System.out.println("Welcome to the tennis self rating and location tracking system");
 		System.out.println("This basic information cannot be changed");
+		
 		//print the picture to the sceen
-		System.out.println("To start off please enter the x and y coordinates of your location based off of the map on your screen");
+		System.out.println("To start off, please enter the x and y coordinates of your location based off of the map on your screen");
 		String input = PictureTester.getCoordinates();
 		//3.153 miles per pixel
-		
-		System.out.println(input);
-		
+				
 		int x = Integer.parseInt(input.substring(0, input.indexOf(" ")));
 		int y = Integer.parseInt(input.substring(input.indexOf(" ") + 1));
 		
 		System.out.println("Wat is your name (First Last)?");
 		String name = userinput.nextLine();
-		System.out.println("Enter Gender 1. Male, 2. Female");
+		System.out.println("what is your preferred Gender?\n1. Male, 2. Female");
 		int gender = userinput.nextInt();
 		System.out.println("What is your age?");
 		int age = userinput.nextInt();
@@ -39,25 +40,27 @@ public class MenuDriven {
 		if(gender == 1)
 		{
 			Player user = new Male(name, age, serve, 0, rating, x, y);
-			//Association.add(user);
+			//association.add(user);
 		}
 		else if (gender == 2)
 		{
 			Player user = new Female(name, age, serve, 0, rating, x , y);
-			//Association.add(user);
+			//association.add(user);
 		}
 		
 		
 		//print x  and y coordinates
 		
 		
+		
+		userinput.close();
 	}
 	
 	public void addAplayer(Player dude)
 	{
 		String name = dude.getName();
 		int index = 0;
-		for(Player p : Association)
+		for(Player p : association)
 		{
 			int value = name.compareTo(p.getName());
 			
@@ -68,16 +71,16 @@ public class MenuDriven {
 			
 			else if(value < 0)
 			{
-				Association.add(index, dude);
+				association.add(index, dude);
 				return;
 			}
 			index++;
 		}
-		Association.add(dude);
+		association.add(dude);
 		
 	}
 	
-	public void generatePlayers(ArrayList Association)
+	public void generatePlayers(ArrayList association)
 	{
 		Random rand = new Random();
 		
@@ -133,7 +136,7 @@ public class MenuDriven {
 					int speed = rand.nextInt(50) + 70;
 					
 					Player player = new Male(name, age, speed, cash, rate, col, row);
-					Association.add(player);
+					association.add(player);
 				}
 				
 				String boy = "Female.txt"; //Male File
@@ -184,7 +187,7 @@ public class MenuDriven {
 					int speed = rand.nextInt(50) + 70;
 					
 					Player player = new Female(name, age, speed, cash, rate, col, row);
-					Association.add(player);
+					association.add(player);
 				}
 			
 			
@@ -199,13 +202,13 @@ public class MenuDriven {
 	
 	public void printList()
 	{
-		for(Player p: Association)
+		for(Player p: association)
 		{
 			System.out.println(p.toString());
 		}
 	}
 	
-public double distanceMiles(int row1, int col1, int row2, int col2) {
+	public double distanceMiles(int row1, int col1, int row2, int col2) {
 		
 		double pixelDist = Math.sqrt(Math.pow((double) (col2 - col1), 2) + Math.pow((double) (row2 - row1), 2));
 		double milesDist = pixelDist * 3.1538;
@@ -213,5 +216,24 @@ public double distanceMiles(int row1, int col1, int row2, int col2) {
 		return milesDist;
 	}
 
-
+	public static int findName(String findThisName) {
+		int start = 0, end = association.size(), mid;
+	
+		while (start <= end) {
+			mid = (start + end) / 2;
+			String midName = association.get(mid).getName();
+			
+			if (midName.equals(findThisName)) {
+				return mid;
+			}
+			else if (findThisName.compareTo(midName) > 0) {
+				start = mid;
+			}
+			else {
+				end = mid;
+			}
+		}
+	
+		return -1;
+	}
 }

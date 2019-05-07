@@ -1,25 +1,19 @@
 //package mySlam;
 
-public abstract class Player {
+public class Player {
 
-	public String name;
-	public int age;
-	public String gender;
-	public int serve;
-	public int cash;
-	public double rating;
-	//public double drating;
-	public int x;
-	public int y;
+	// do we want these to be private????
+	public String name, gender;
+	public int serve, cash, age, x, y;
+	public double rating /* ,drating */;
 	
-	public Player()
-	{
+	public Player() {
 		
 	}
 	
-	public Player(String named, int tage, int tserve, int tcash, double tsrating, int xcord, int ycord)
+	public Player(String tname, int tage, int tserve, int tcash, double tsrating, int xcord, int ycord)
 	{
-		name = named;
+		name = tname;
 		age = tage;
 		serve = tserve;
 		cash = tcash;
@@ -75,5 +69,10 @@ public abstract class Player {
 		string = string + "name: " + name + "age: " + age;
 		return string;
 	}
-	public abstract Player findMixed(Player person);
+	public Player findMixed(Player person) {
+		if (gender.equals("female")) {
+			// complete this later 
+		}
+		return new Player();
+	}
 }

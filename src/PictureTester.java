@@ -1,4 +1,4 @@
-package mySlam;
+//package mySlam;
 
 import java.util.Scanner;
 

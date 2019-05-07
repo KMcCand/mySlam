@@ -1,4 +1,4 @@
-package mySlam;
+//package mySlam;
 
 import java.awt.Menu;
 import java.util.Collections;
@@ -26,16 +26,16 @@ public class SinglesMatch extends Match{
 			System.out.print("What was their name: ");
 			String skippedName = userInput.next(); 
 			
-			int index = Collections.binarySearch(menuDriven.Association, skippedName);
-			menuDriven.Association.get(index).addPay(-5);
+			int index = MenuDriven.findName(skippedName);
+			MenuDriven.association.get(index).addPay(-5);
 		}
 			
 		else if (firstInput.indexOf('0') == - 1) {
 				
 			String winnerName = userInput.next();
-			int index = Collections.binarySearch(menuDriven.Association, winnerName);
-			menuDriven.Association.get(index).addPay(5);
-			winner1 = menuDriven.Association.get(index);
+			int index = MenuDriven.findName(winnerName);
+			MenuDriven.association.get(index).addPay(5);
+			winner1 = MenuDriven.association.get(index);
 		}
 	}
 		

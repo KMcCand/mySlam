@@ -10,8 +10,8 @@ public class DoublesMatch extends Match {
 	public DoublesMatch(Player team1First, Player team1Second, Player team2First, Player team2Second) {
 		enterTime();
 		
-		playRow = findRow(findRow(team1First, team1Second), findRow(team2First, team2Second));
-		playCol = findCol(findCol(team1First, team1Second), findCol(team2First, team2Second));
+		playRow = (findRow(team1First, team1Second) + findRow(team2First, team2Second)) / 2;
+		playCol = (findCol(team1First, team1Second) + findCol(team2First, team2Second)) / 2;
 		
 		enterWinner();
 	}
@@ -36,12 +36,14 @@ public class DoublesMatch extends Match {
 			System.out.print("Enter their name: ");
 			String skippedName = userInput.next(); 
 			
-			int index = Collections.binarySearch(menuDriven.Association, skippedName);
-			menuDriven.Association.get(index).addPay(-5);
+			int index = MenuDriven.findName(skippedName);
+			// WRITE OUR OWN BINARY SEARCH METHOD SCREW THIS 
+			MenuDriven.association.get(index).addPay(-5);
 			
 			break;
 		case 3:
 			boolean valid = true;
+			String winner1Name = "", winner2Name = "";
 			
 			do {
 				
@@ -57,19 +59,19 @@ public class DoublesMatch extends Match {
 					valid = false;
 				}
 				else {
-					String winner1Name = winnerLine.substring(0, spacePos);
-					String winner2Name = winnerLine.substring(spacePos + 1);
+					winner1Name = winnerLine.substring(0, spacePos);
+					winner2Name = winnerLine.substring(spacePos + 1);
 				}
 				
 			} while (valid = false);
 			
-			int Winner1Index = Collections.binarySearch(menuDriven.Association, winner1Name);
-			int Winner2Index = Collections.binarySearch(menuDriven.Association, winner2Name);
+			int Winner1Index = MenuDriven.findName(winner1Name);
+			int Winner2Index = MenuDriven.findName(winner2Name);
 			
-			winner1 = menuDriven.Association.get(Winner1Index);
+			winner1 = MenuDriven.association.get(Winner1Index);
 			winner1.addPay(5);
 			
-			winner2 = menuDriven.Association.get(Winner2Index);
+			winner2 = MenuDriven.association.get(Winner2Index);
 			winner2.addPay(5);
 			
 			break;
