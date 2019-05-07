@@ -15,18 +15,18 @@ public class MenuDriven {
 		// TODO Auto-generated method stub
 		Scanner userinput = new Scanner(System.in);
 		
-		System.out.println("Welcome to the tennis self rating and location tracking system");
-		System.out.println("This basic information cannot be changed");
+		System.out.println("Welcome to our match finding program!!!");
+		System.out.println("To start off, enter your basic information\n");
 		
-		//print the picture to the sceen
-		System.out.println("To start off, please enter the x and y coordinates of your location based off of the map on your screen");
+		//print the map to the screen
+		System.out.println("Please enter the x and y coordinates of your location based on the map");
 		String input = PictureTester.getCoordinates();
 		//3.153 miles per pixel
 				
 		int x = Integer.parseInt(input.substring(0, input.indexOf(" ")));
 		int y = Integer.parseInt(input.substring(input.indexOf(" ") + 1));
 		
-		System.out.println("Wat is your name (First Last)?");
+		System.out.println("What is your name (First Last)?");
 		String name = userinput.nextLine();
 		System.out.println("what is your preferred Gender?\n1. Male, 2. Female");
 		int gender = userinput.nextInt();

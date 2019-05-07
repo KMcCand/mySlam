@@ -28,7 +28,7 @@ public class PictureTester {
 			}
 			valid = true;
 			
-			System.out.print("Use the zoom function in the upper left to find the coordinates of your location (row colum): ");
+			System.out.print("Use the zoom function in the upper left to enter (row, column): ");
 			line = userInput.nextLine();
 			spacePos = line.indexOf(' ');
 			
