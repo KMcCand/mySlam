@@ -28,7 +28,7 @@ public class MenuDriven {
 		
 		System.out.println("What is your name (First Last)?");
 		String name = userinput.nextLine();
-		System.out.println("what is your preferred Gender?\n1. Male, 2. Female");
+		System.out.println("What gender would you prefer to play as?\n1. Male, 2. Female");
 		int gender = userinput.nextInt();
 		System.out.println("What is your age?");
 		int age = userinput.nextInt();
@@ -39,12 +39,12 @@ public class MenuDriven {
 		int serve = userinput.nextInt();
 		if(gender == 1)
 		{
-			Player user = new Male(name, age, serve, 0, rating, x, y);
+			Player user = new Player(name, "male", age, serve, 0, rating, x, y);
 			//association.add(user);
 		}
 		else if (gender == 2)
 		{
-			Player user = new Female(name, age, serve, 0, rating, x , y);
+			Player user = new Player(name, "female", age, serve, 0, rating, x , y);
 			//association.add(user);
 		}
 		
@@ -135,7 +135,7 @@ public class MenuDriven {
 					//SERVE SPEED PROPERTY
 					int speed = rand.nextInt(50) + 70;
 					
-					Player player = new Male(name, age, speed, cash, rate, col, row);
+					Player player = new Player(name, "male", age, speed, cash, rate, col, row);
 					association.add(player);
 				}
 				
@@ -186,7 +186,7 @@ public class MenuDriven {
 					//SERVE SPEED PROPERTY
 					int speed = rand.nextInt(50) + 70;
 					
-					Player player = new Female(name, age, speed, cash, rate, col, row);
+					Player player = new Player(name, "female", age, speed, cash, rate, col, row);
 					association.add(player);
 				}
 			

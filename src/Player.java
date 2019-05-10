@@ -13,9 +13,10 @@ public class Player {
 		
 	}
 	
-	public Player(String tname, int tage, int tserve, int tcash, double tsrating, int theRow, int theCol)
+	public Player(String tname, String theGender, int tage, int tserve, int tcash, double tsrating, int theRow, int theCol)
 	{
 		name = tname;
+		gender = theGender;
 		age = tage;
 		serve = tserve;
 		cash = tcash;
@@ -31,6 +32,10 @@ public class Player {
 	public double getSinglesRating()
 	{
 		return rating;	
+	}
+	
+	public String getGender() {
+		return gender;
 	}
 	
 	public double distanceMiles(Player p2) {
