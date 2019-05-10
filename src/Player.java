@@ -4,22 +4,24 @@ public class Player {
 
 	// do we want these to be private????
 	public String name, gender;
-	public int serve, cash, age, x, y;
+	public int serve, cash, age, row, col;
 	public double rating /* ,drating */;
+	
+	public final double maxDist = 30.0;
 	
 	public Player() {
 		
 	}
 	
-	public Player(String tname, int tage, int tserve, int tcash, double tsrating, int xcord, int ycord)
+	public Player(String tname, int tage, int tserve, int tcash, double tsrating, int theRow, int theCol)
 	{
 		name = tname;
 		age = tage;
 		serve = tserve;
 		cash = tcash;
 		rating = tsrating;
-		x = xcord;
-		y = ycord;
+		row = theRow;
+		col = theCol;
 	}
 	
 	public String getName()
@@ -31,7 +33,13 @@ public class Player {
 		return rating;	
 	}
 	
-	
+	public double distanceMiles(Player p2) {
+		
+		double pixelDist = Math.sqrt(Math.pow((double) (p2.getCol() - col), 2) + Math.pow((double) (p2.getRow() - row), 2));
+		double milesDist = pixelDist * 3.1538;
+		
+		return milesDist;
+	}
 	
 	public int getServe()
 	{
@@ -55,12 +63,12 @@ public class Player {
 	
 	public int getRow()
 	{
-		return y;
+		return row;
 	}
 	
 	public int getCol()
 	{
-		return x;
+		return col;
 	}
 	
 	public String toString()
@@ -69,10 +77,28 @@ public class Player {
 		string = string + "name: " + name + "age: " + age;
 		return string;
 	}
-	public Player findMixed(Player person) {
-		if (gender.equals("female")) {
-			// complete this later 
+	
+	public void makeSinglesMatch() {
+		
+		// do we want to avoid males playing females? if so, move this to male / female and make it gender specific. 
+		// I think its ok for males to play females, in which case we leave this here. 
+		
+		double minRatingDif = Integer.MAX_VALUE;
+		Player playThisGuy = new Player();
+		
+		for (Player onePlayer : MenuDriven.association) {
+			if (distanceMiles(onePlayer) < maxDist) {
+				
+				double ratingDif = Math.abs(onePlayer.getSinglesRating() - rating);
+				
+				if (ratingDif < minRatingDif) {
+					minRatingDif = ratingDif;
+					playThisGuy = onePlayer;
+				}
+			}
 		}
-		return new Player();
+		
+		SinglesMatch goodMatch = new SinglesMatch(playThisGuy, this);
 	}
+	
 }

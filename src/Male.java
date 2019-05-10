@@ -7,12 +7,12 @@ public class Male extends Player {
 		
 	}
 	
-	public Male(String name, int tage, int tserve, int cash, double trating, int x, int y)
+	public Male(String name, int tage, int tserve, int tcash, double tsrating, int row, int col)
 	{
-		super(name, tage, tserve, cash, trating, x , y);
+		super(name, tage, tserve, tcash, tsrating, row, col);
 	}
 	
-	public Player findMixed(Player searching)
+	public Player makeMixedDoublesMatch (Player searching)
 	{
 		Player player = new Female("", 0, 0, 0, 0, 0, 0);
 		return player;

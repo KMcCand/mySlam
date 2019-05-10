@@ -207,14 +207,6 @@ public class MenuDriven {
 			System.out.println(p.toString());
 		}
 	}
-	
-	public double distanceMiles(int row1, int col1, int row2, int col2) {
-		
-		double pixelDist = Math.sqrt(Math.pow((double) (col2 - col1), 2) + Math.pow((double) (row2 - row1), 2));
-		double milesDist = pixelDist * 3.1538;
-		
-		return milesDist;
-	}
 
 	public static int findName(String findThisName) {
 		int start = 0, end = association.size(), mid;
