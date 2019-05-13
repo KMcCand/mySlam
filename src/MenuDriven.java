@@ -57,23 +57,11 @@ public class MenuDriven {
 	{
 		String name = dude.getName();
 		int index = 0;
-		for(Player p : association)
-		{
-			int value = name.compareTo(p.getName());
-			
-			if(value == 0)
-			{
-				return;
-			}
-			
-			else if(value < 0)
-			{
-				association.add(index, dude);
-				return;
-			}
-			index++;
+		
+		while ((index < association.size()) && (name.compareTo(association.get(index).getName()) > 0)) {
+			index ++;
 		}
-		association.add(dude);
+		association.add(index, dude);
 		
 	}
 	
