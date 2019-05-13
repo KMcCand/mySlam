@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 public class MenuDriven {
 	
-	private static Scanner userinput;
 	public static ArrayList<Player> association = new ArrayList<Player>();
 	
 	public static void main(String[] args) {
@@ -40,23 +39,21 @@ public class MenuDriven {
 		if(gender == 1)
 		{
 			Player user = new Player(name, "male", age, serve, 0, rating, x, y);
-			//association.add(user);
+			addPlayer(user);
 		}
 		else if (gender == 2)
 		{
 			Player user = new Player(name, "female", age, serve, 0, rating, x , y);
-			//association.add(user);
+			addPlayer(user);
 		}
 		
 		
 		//print x  and y coordinates
 		
-		
-		
 		userinput.close();
 	}
 	
-	public void addAplayer(Player dude)
+	public static void addPlayer(Player dude)
 	{
 		String name = dude.getName();
 		int index = 0;
@@ -136,7 +133,7 @@ public class MenuDriven {
 					int speed = rand.nextInt(50) + 70;
 					
 					Player player = new Player(name, "male", age, speed, cash, rate, col, row);
-					association.add(player);
+					addPlayer(player);
 				}
 				
 				String boy = "Female.txt"; //Male File
@@ -156,7 +153,7 @@ public class MenuDriven {
 				{
 					String name = input.nextLine();
 					name = name + " Pendergast";
-					boolean legit = false;
+					boolean legit;
 					
 					//Coordinate checking loop
 					int col = 0;
@@ -168,9 +165,10 @@ public class MenuDriven {
 						
 						Picture USMap = new Picture("images/USMap.jpg");
 						legit = Picture.testColor(row, col, USMap);
+						
 					}while(legit = false);
 					
-					//////
+					
 					double rate = rand.nextInt(8) + 1;
 					int subtract = rand.nextInt(2);
 					if(subtract == 1)
@@ -187,7 +185,7 @@ public class MenuDriven {
 					int speed = rand.nextInt(50) + 70;
 					
 					Player player = new Player(name, "female", age, speed, cash, rate, col, row);
-					association.add(player);
+					addPlayer(player);
 				}
 			
 			
@@ -228,5 +226,4 @@ public class MenuDriven {
 	
 		return -1;
 	}
-	// hi i changed the file 
 }
