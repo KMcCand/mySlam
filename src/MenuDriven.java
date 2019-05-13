@@ -15,26 +15,46 @@ public class MenuDriven {
 		Scanner userinput = new Scanner(System.in);
 		
 		System.out.println("Welcome to our match finding program!!!");
-		System.out.println("To start off, enter your basic information\n");
+		System.out.println("To start off, enter your basic information\n-----------------------------------------------");
 		
 		//print the map to the screen
-		System.out.println("Please enter the x and y coordinates of your location based on the map");
+		System.out.println("\nPlease enter the x and y coordinates of your location on the map");
 		String input = PictureTester.getCoordinates();
 		//3.153 miles per pixel
 				
 		int x = Integer.parseInt(input.substring(0, input.indexOf(" ")));
 		int y = Integer.parseInt(input.substring(input.indexOf(" ") + 1));
 		
-		System.out.println("What is your name (First Last)?");
+		System.out.println("\nWhat is your name (First Last)?");
 		String name = userinput.nextLine();
-		System.out.println("What gender would you prefer to play as?\n1. Male, 2. Female");
+		System.out.println("\nWhat gender would you prefer to play as?\n1. Male, 2. Female");
 		int gender = userinput.nextInt();
-		System.out.println("What is your age?");
+		System.out.println("\nWhat is your age?");
 		int age = userinput.nextInt();
-		System.out.println("What is you rating on the 8 point USTA Scale (half points possible)");
-		System.out.println("Eg. 4.0, 5.5, 7.0, 2.5");
+		System.out.println("\nWhat experience do you have with tennis:");
+		System.out.println("   Beginning   1.0 Just starting to play tennis\n" + 
+				"       |       1.5 Limited experience, still working on getting the ball into play\n" + 
+				"       |       2.0 Needs on-court experience, has obvious stroke weaknesses but familiar with basic positions for singles and doubles\n\n" + 
+				
+				"       |       2.5 Learning to judge where the ball is going, though court coverage is weak. Can do short rallies of slow pace\n" + 
+				"       |       3.0 Fairly consistent when hitting medium-paced shots, but not that comfortable with directional control, depth or power.\n" + 
+				"       |       3.5 Has improved stroke dependability with directional control on moderate shots, but lacks depth and variety. Has aggressive net play and improved court coverage\n\n" + 
+				
+				"       |       4.0 Dependable strokes, including directional control and depth on both forehand and backhand, plus the ability to use lobs, overheads, approach shots and volleys\n" + 
+				"       |       4.5 Starting to use power and spins and beginning to handle pace. Has sound footwork, can control shot depth and vary game plan according to opponents. Can hit first serves with power and accuracy\n" + 
+				"       |       5.0 Good shot anticipation and has an outstanding shot or exceptional consistency. Often hits winners or forces errors off of short balls. Can put away volleys and execute lobs, drop shots, half volleys and overheads\n\n" +
+				
+				"       |       5.5 Has developed power and/or consistency as a major weapon. Can vary strategies in a competitive situation and hit dependable shots in a stress situation\n" + 
+				"       |       6.0 Has obtained a sectional or national ranking\n" + 
+				"       |       6.5 Has extensive satellite tournament experience\n" + 
+				"      Pro      7.0 Makes most of their income from tennis");
+		
 		double rating = userinput.nextDouble();
-		System.out.println("What is your average serve speed to the nearest mph?");
+		
+		System.out.println("--------------------------------------------------\nDo you want to enter advanced settings?");
+		System.out.println("(Preferences on fitness and social levels, serve speed, playing up or down, etc)");
+		
+		System.out.println("Enter your serve speed to the nearest mph: ");
 		int serve = userinput.nextInt();
 		if(gender == 1)
 		{
