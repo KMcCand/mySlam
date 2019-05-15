@@ -10,9 +10,12 @@ public class MenuDriven {
 	public static ArrayList<Player> association = new ArrayList<Player>();
 	
 	
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner userinput = new Scanner(System.in);
+		generatePlayers(association);
+		printList();
 		
 		System.out.println("Welcome to our match finding program!!!");
 		System.out.println("To start off, enter your basic information\n-----------------------------------------------");
@@ -109,7 +112,7 @@ public class MenuDriven {
 				while(input3.hasNextLine())
 				{
 					String name = input3.nextLine();
-					name = name + " Harris";
+					name = name;
 					boolean legit = false;
 					
 					//Coordinate checking loop
@@ -160,7 +163,7 @@ public class MenuDriven {
 				while(input.hasNextLine())
 				{
 					String name = input.nextLine();
-					name = name + " Pendergast";
+					
 					boolean legit;
 					
 					//Coordinate checking loop

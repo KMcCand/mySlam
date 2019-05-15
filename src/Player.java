@@ -83,7 +83,7 @@ public class Player {
 	public String toString()
 	{
 		String string = "";
-		string = string + "name: " + name + "age: " + age;
+		string = string + "name: " + name + " age: " + age + " Serve: " + serve + " Cash: " + cash + "Rating: " + rating;
 		return string;
 	}
 	
