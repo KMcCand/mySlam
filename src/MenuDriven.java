@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MenuDriven {
-	
 	public static ArrayList<Player> association = new ArrayList<Player>();
+	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -85,7 +85,7 @@ public class MenuDriven {
 		
 	}
 	
-	public void generatePlayers(ArrayList association)
+	public void generatePlayers(ArrayList<Player> association)
 	{
 		Random rand = new Random();
 		
@@ -196,13 +196,33 @@ public class MenuDriven {
 					addPlayer(player);
 				}
 			
+				String cool = "LastNames.txt"; //Male File
+				File fi = new File(yay);
+				Scanner input5 = null;
+				try
+				{
+					input5 = new Scanner(fi);
+				}
+				catch (FileNotFoundException ex)
+				{
+					System.out.println("*** Cannot open " + cool + " ***");
+					System.exit(1);  // quit the program
+				} 
+
+				int lastCount = 0;
+				while(input5.hasNextLine())
+				{
+					String lastName = input5.nextLine();
+					association.get(lastCount).addLastName(lastName);
+					association.get(1999-lastCount).addLastName(lastName);
+					lastCount++;
+				}
 			
 			
 			
 			//RATE PROPERTY
 		
 			
-		
 	}
 
 	

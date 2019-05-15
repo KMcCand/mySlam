@@ -38,6 +38,10 @@ public class Player {
 		return gender;
 	}
 	
+	public void addLastName(String last)
+	{
+		name = name + " " + last;
+	}
 	public double distanceMiles(Player p2) {
 		
 		double pixelDist = Math.sqrt(Math.pow((double) (p2.getCol() - col), 2) + Math.pow((double) (p2.getRow() - row), 2));
