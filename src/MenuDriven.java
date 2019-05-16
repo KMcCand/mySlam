@@ -28,17 +28,17 @@ public class MenuDriven {
 		
 		System.out.println("Enter your serve speed to the nearest mph: ");
 		int serve = userinput.nextInt();
-		if(gender == 1)
-		{
+		if (gender == 1) {
 			Player user = new Player(name, "male", age, serve, 0, rating, x, y);
 			addPlayer(user, association);
 		}
-		else if (gender == 2)
-		{
+		else if (gender == 2) {
 			Player user = new Player(name, "female", age, serve, 0, rating, x , y);
 			addPlayer(user, association);
 		}
 		
+		generatePlayers(association);
+		printList(association);
 		
 		userinput.close();
 	}
@@ -72,6 +72,10 @@ public class MenuDriven {
 		
 		} while (! valid);
 		
+		name.toLowerCase();
+		Character.toUpperCase(name.charAt(0));
+		Character.toUpperCase(name.charAt(name.indexOf(' ') + 1));
+		
 		userInput2.close();
 		return name;
 	}
@@ -85,7 +89,8 @@ public class MenuDriven {
 				System.out.println("Invalid input, try again.");
 			}
 			System.out.println("\nWhat gender would you prefer to play as?\n1. Male, 2. Female");
-			gender = userInput3.nextInt();	
+			gender = userInput3.nextInt();
+			
 		} while ((gender < 1) || (gender > 2));
 		
 		userInput3.close();
@@ -189,7 +194,6 @@ public class MenuDriven {
 				while(input3.hasNextLine())
 				{
 					String name = input3.nextLine();
-					name = name;
 					boolean legit = false;
 					
 					//Coordinate checking loop
@@ -204,7 +208,7 @@ public class MenuDriven {
 						legit = Picture.testColor(row, col, USMap);
 					}while(legit = false);
 					
-					//////
+					
 					double rate = rand.nextInt(8) + 1;
 					int subtract = rand.nextInt(2);
 					if(subtract == 1)
