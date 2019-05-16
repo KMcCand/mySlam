@@ -1,22 +1,23 @@
 import java.util.Collections;
 import java.util.Scanner;
-
+import java.util.ArrayList;
+import java.util.ArrayList;
 public class DoublesMatch extends Match {
 	
 	public DoublesMatch() {
 		
 	}
 	
-	public DoublesMatch(Player team1First, Player team1Second, Player team2First, Player team2Second) {
+	public DoublesMatch(Player team1First, Player team1Second, Player team2First, Player team2Second, ArrayList<Player> association) {
 		enterTime();
 		
 		playRow = (findRow(team1First, team1Second) + findRow(team2First, team2Second)) / 2;
 		playCol = (findCol(team1First, team1Second) + findCol(team2First, team2Second)) / 2;
 		
-		enterWinner();
+		enterWinner(association);
 	}
 	
-	public void enterWinner() {
+	public void enterWinner(ArrayList<Player> association) {
 		Scanner userInput = new Scanner (System.in);
 		int userChoice = 0;
 		
@@ -36,9 +37,9 @@ public class DoublesMatch extends Match {
 			System.out.print("Enter their name: ");
 			String skippedName = userInput.next(); 
 			
-			int index = MenuDriven.findName(skippedName);
+			int index = MenuDriven.findName(skippedName, association);
 			// WRITE OUR OWN BINARY SEARCH METHOD SCREW THIS 
-			MenuDriven.association.get(index).addPay(-5);
+			association.get(index).addPay(-5);
 			
 			break;
 		case 3:
@@ -65,13 +66,13 @@ public class DoublesMatch extends Match {
 				
 			} while (valid = false);
 			
-			int Winner1Index = MenuDriven.findName(winner1Name);
-			int Winner2Index = MenuDriven.findName(winner2Name);
+			int Winner1Index = MenuDriven.findName(winner1Name, association);
+			int Winner2Index = MenuDriven.findName(winner2Name, association);
 			
-			winner1 = MenuDriven.association.get(Winner1Index);
+			winner1 = association.get(Winner1Index);
 			winner1.addPay(5);
 			
-			winner2 = MenuDriven.association.get(Winner2Index);
+			winner2 = association.get(Winner2Index);
 			winner2.addPay(5);
 			
 			break;

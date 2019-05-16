@@ -31,12 +31,12 @@ public class MenuDriven {
 		if(gender == 1)
 		{
 			Player user = new Player(name, "male", age, serve, 0, rating, x, y);
-			addPlayer(user);
+			addPlayer(user, association);
 		}
 		else if (gender == 2)
 		{
 			Player user = new Player(name, "female", age, serve, 0, rating, x , y);
-			addPlayer(user);
+			addPlayer(user, association);
 		}
 		
 		
@@ -153,7 +153,7 @@ public class MenuDriven {
 	}
 	
 	
-	public static void addPlayer(Player dude)
+	public static void addPlayer(Player dude, ArrayList<Player> association)
 	{
 		String name = dude.getName();
 		int index = 0;
@@ -165,7 +165,7 @@ public class MenuDriven {
 		
 	}
 	
-	public void generatePlayers(ArrayList association)
+	public static void generatePlayers(ArrayList<Player> association)
 	{
 		Random rand = new Random();
 		
@@ -189,7 +189,7 @@ public class MenuDriven {
 				while(input3.hasNextLine())
 				{
 					String name = input3.nextLine();
-					name = name + " Harris";
+					name = name;
 					boolean legit = false;
 					
 					//Coordinate checking loop
@@ -204,7 +204,7 @@ public class MenuDriven {
 						legit = Picture.testColor(row, col, USMap);
 					}while(legit = false);
 					
-				
+					//////
 					double rate = rand.nextInt(8) + 1;
 					int subtract = rand.nextInt(2);
 					if(subtract == 1)
@@ -221,7 +221,7 @@ public class MenuDriven {
 					int speed = rand.nextInt(50) + 70;
 					
 					Player player = new Player(name, "male", age, speed, cash, rate, col, row);
-					addPlayer(player);
+					addPlayer(player, association);
 				}
 				
 				String boy = "Female.txt"; //Male File
@@ -240,7 +240,7 @@ public class MenuDriven {
 				while(input.hasNextLine())
 				{
 					String name = input.nextLine();
-					name = name + " Pendergast";
+					
 					boolean legit;
 					
 					//Coordinate checking loop
@@ -273,28 +273,50 @@ public class MenuDriven {
 					int speed = rand.nextInt(50) + 70;
 					
 					Player player = new Player(name, "female", age, speed, cash, rate, col, row);
-					addPlayer(player);
+					addPlayer(player, association);
+				}
+			
+				String cool = "LastNames.txt"; //Male File
+				File fi = new File(yay);
+				Scanner input5 = null;
+				try
+				{
+					input5 = new Scanner(fi);
+				}
+				catch (FileNotFoundException ex)
+				{
+					System.out.println("*** Cannot open " + cool + " ***");
+					System.exit(1);  // quit the program
+				} 
+
+				int lastCount = 0;
+				while(input5.hasNextLine())
+				{
+					String lastName = input5.nextLine();
+					association.get(lastCount).addLastName(lastName);
+					association.get(1999-lastCount).addLastName(lastName);
+					lastCount++;
 				}
 			
 			
 			
-			
 			//RATE PROPERTY
+				//Vir's new code 
 		
 			
-		
 	}
 
 	
-	public void printList()
+	public static void printList(ArrayList<Player> association)
 	{
 		for(Player p: association)
 		{
 			System.out.println(p.toString());
 		}
 	}
+//hello
 
-	public static int findName(String findThisName) {
+	public static int findName(String findThisName, ArrayList<Player> association) {
 		int start = 0, end = association.size(), mid;
 	
 		while (start <= end) {

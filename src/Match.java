@@ -1,5 +1,5 @@
 //package mySlam;
-
+import java.util.ArrayList;
 import java.awt.Menu;
 import java.util.Collections;
 import java.util.Scanner;
@@ -19,7 +19,7 @@ public abstract class Match {
 		winner2 = new Player();
 	}
 	
-	public abstract void enterWinner();
+	public abstract void enterWinner(ArrayList<Player> association);
 	
 	public int findRow(Player firstGuy, Player secondGuy) {
 		// NOTE: NEED TO USE GOOGLE MAPS TO FIND AN ACTUAL TENNIS CLUB WHEN GET THE CHANCE
