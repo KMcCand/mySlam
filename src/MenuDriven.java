@@ -7,16 +7,16 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MenuDriven {
-	public static ArrayList<Player> association = new ArrayList<Player>();
 	
 	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner userinput = new Scanner(System.in);
+		ArrayList<Player> association = new ArrayList<Player>();
 		generatePlayers(association);
-		printList();
-		
+		printList(association);
+		//make not static or make reference correct
 		System.out.println("Welcome to our match finding program!!!");
 		System.out.println("To start off, enter your basic information\n-----------------------------------------------");
 		
@@ -62,12 +62,12 @@ public class MenuDriven {
 		if(gender == 1)
 		{
 			Player user = new Player(name, "male", age, serve, 0, rating, x, y);
-			addPlayer(user);
+			addPlayer(user, association);
 		}
 		else if (gender == 2)
 		{
 			Player user = new Player(name, "female", age, serve, 0, rating, x , y);
-			addPlayer(user);
+			addPlayer(user, association);
 		}
 		
 		
@@ -76,7 +76,7 @@ public class MenuDriven {
 		userinput.close();
 	}
 	
-	public static void addPlayer(Player dude)
+	public static void addPlayer(Player dude, ArrayList<Player> association)
 	{
 		String name = dude.getName();
 		int index = 0;
@@ -88,7 +88,7 @@ public class MenuDriven {
 		
 	}
 	
-	public void generatePlayers(ArrayList<Player> association)
+	public static void generatePlayers(ArrayList<Player> association)
 	{
 		Random rand = new Random();
 		
@@ -144,7 +144,7 @@ public class MenuDriven {
 					int speed = rand.nextInt(50) + 70;
 					
 					Player player = new Player(name, "male", age, speed, cash, rate, col, row);
-					addPlayer(player);
+					addPlayer(player, association);
 				}
 				
 				String boy = "Female.txt"; //Male File
@@ -196,7 +196,7 @@ public class MenuDriven {
 					int speed = rand.nextInt(50) + 70;
 					
 					Player player = new Player(name, "female", age, speed, cash, rate, col, row);
-					addPlayer(player);
+					addPlayer(player, association);
 				}
 			
 				String cool = "LastNames.txt"; //Male File
@@ -230,7 +230,7 @@ public class MenuDriven {
 	}
 
 	
-	public void printList()
+	public static void printList(ArrayList<Player> association)
 	{
 		for(Player p: association)
 		{
@@ -238,7 +238,7 @@ public class MenuDriven {
 		}
 	}
 
-	public static int findName(String findThisName) {
+	public static int findName(String findThisName, ArrayList<Player> association) {
 		int start = 0, end = association.size(), mid;
 	
 		while (start <= end) {

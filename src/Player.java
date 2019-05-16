@@ -1,5 +1,5 @@
 //package mySlam;
-
+import java.util.ArrayList;
 public class Player {
 
 	// do we want these to be private????
@@ -87,7 +87,7 @@ public class Player {
 		return string;
 	}
 	
-	public void makeSinglesMatch() {
+	public void makeSinglesMatch(ArrayList<Player> association) {
 		
 		// do we want to avoid males playing females? if so, move this to male / female and make it gender specific. 
 		// I think its ok for males to play females, in which case we leave this here. 
@@ -95,7 +95,7 @@ public class Player {
 		double minRatingDif = Integer.MAX_VALUE;
 		Player playThisGuy = new Player();
 		
-		for (Player onePlayer : MenuDriven.association) {
+		for (Player onePlayer : association) {
 			if (distanceMiles(onePlayer) < maxDist) {
 				
 				double ratingDif = Math.abs(onePlayer.getSinglesRating() - rating);
@@ -107,7 +107,7 @@ public class Player {
 			}
 		}
 		
-		SinglesMatch goodMatch = new SinglesMatch(playThisGuy, this);
+		SinglesMatch goodMatch = new SinglesMatch(playThisGuy, this, association);
 	}
 	
 }
