@@ -7,52 +7,21 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MenuDriven {
+	
 	public static ArrayList<Player> association = new ArrayList<Player>();
 	
-	
-	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		Scanner userinput = new Scanner(System.in);
-		generatePlayers(association);
-		printList();
 		
 		System.out.println("Welcome to our match finding program!!!");
 		System.out.println("To start off, enter your basic information\n-----------------------------------------------");
 		
-		//print the map to the screen
-		System.out.println("\nPlease enter the x and y coordinates of your location on the map");
-		String input = PictureTester.getCoordinates();
-		//3.153 miles per pixel
-				
+		String input = locInput(), name = nameInput();
+		int gender = genderInput(), age = ageInput();
+		double rating = ratingInput();
+		
 		int x = Integer.parseInt(input.substring(0, input.indexOf(" ")));
-		int y = Integer.parseInt(input.substring(input.indexOf(" ") + 1));
-		
-		System.out.println("\nWhat is your name (First Last)?");
-		String name = userinput.nextLine();
-		System.out.println("\nWhat gender would you prefer to play as?\n1. Male, 2. Female");
-		int gender = userinput.nextInt();
-		System.out.println("\nWhat is your age?");
-		int age = userinput.nextInt();
-		System.out.println("\nWhat experience do you have with tennis:");
-		System.out.println("   Beginning   1.0 Just starting to play tennis\n" + 
-				"       |       1.5 Limited experience, still working on getting the ball into play\n" + 
-				"       |       2.0 Needs on-court experience, has obvious stroke weaknesses but familiar with basic positions for singles and doubles\n\n" + 
-				
-				"       |       2.5 Learning to judge where the ball is going, though court coverage is weak. Can do short rallies of slow pace\n" + 
-				"       |       3.0 Fairly consistent when hitting medium-paced shots, but not that comfortable with directional control, depth or power.\n" + 
-				"       |       3.5 Has improved stroke dependability with directional control on moderate shots, but lacks depth and variety. Has aggressive net play and improved court coverage\n\n" + 
-				
-				"       |       4.0 Dependable strokes, including directional control and depth on both forehand and backhand, plus the ability to use lobs, overheads, approach shots and volleys\n" + 
-				"       |       4.5 Starting to use power and spins and beginning to handle pace. Has sound footwork, can control shot depth and vary game plan according to opponents. Can hit first serves with power and accuracy\n" + 
-				"       |       5.0 Good shot anticipation and has an outstanding shot or exceptional consistency. Often hits winners or forces errors off of short balls. Can put away volleys and execute lobs, drop shots, half volleys and overheads\n\n" +
-				
-				"       |       5.5 Has developed power and/or consistency as a major weapon. Can vary strategies in a competitive situation and hit dependable shots in a stress situation\n" + 
-				"       |       6.0 Has obtained a sectional or national ranking\n" + 
-				"       |       6.5 Has extensive satellite tournament experience\n" + 
-				"      Pro      7.0 Makes most of their income from tennis");
-		
-		double rating = userinput.nextDouble();
+		int y = Integer.parseInt(input.substring(input.indexOf(" ") + 1));	
 		
 		System.out.println("--------------------------------------------------\nDo you want to enter advanced settings?");
 		System.out.println("(Preferences on fitness and social levels, serve speed, playing up or down, etc)");
@@ -71,10 +40,118 @@ public class MenuDriven {
 		}
 		
 		
-		//print x  and y coordinates
-		
 		userinput.close();
 	}
+	
+	public static String locInput() {
+		//print the map to the screen
+		System.out.println("\nUse the zoom function in the upper left to enter your location (row col):");
+		return PictureTester.getCoordinates();
+		//3.153 miles per pixel
+		
+	}
+	
+	public static String nameInput() {
+		boolean valid = true;
+		Scanner userInput2 = new Scanner(System.in);
+		String name = "";
+		
+		do {
+			if (! valid) {
+				System.out.println("Invalid input, try again.");
+			}
+			
+			System.out.println("\nWhat do you like to be called (First Last)?");
+			name = userInput2.nextLine();
+			
+			valid = true;
+			name = name.trim();
+			if (name.indexOf(' ') == -1) {
+				valid = false;
+			}
+		
+		} while (! valid);
+		
+		userInput2.close();
+		return name;
+	}
+	
+	public static int genderInput() {
+		Scanner userInput3 = new Scanner(System.in);
+		int gender = 1;
+		
+		do {
+			if ((gender < 1) || (gender > 2)) {
+				System.out.println("Invalid input, try again.");
+			}
+			System.out.println("\nWhat gender would you prefer to play as?\n1. Male, 2. Female");
+			gender = userInput3.nextInt();	
+		} while ((gender < 1) || (gender > 2));
+		
+		userInput3.close();
+		return gender;
+	}
+	
+	public static int ageInput() {
+		Scanner userInput4 = new Scanner(System.in);
+		int age = 30, lastEnteredAge = 30;
+		
+		do {
+			lastEnteredAge = age;
+			if (age < 1) {
+				System.out.print("Invalid input, try again.");
+			}
+			else if (age < 5) {
+				System.out.println("Are you sure you are that young? Enter your age again.");
+			}
+			else if (age > 100) {
+				System.out.println("Maybe you shouldn't be playing tennis. Enter your age again.");
+			}
+			System.out.println("\nWhat is your age?");
+			age = userInput4.nextInt();
+			
+			if (age == lastEnteredAge) {
+				userInput4.close();
+				return age;
+			}
+			
+		} while ((age < 5) || (age > 100));	
+		
+		userInput4.close();
+		return age;
+	}
+	
+	public static double ratingInput() {
+		Scanner userInput5 = new Scanner(System.in);
+		double rating;
+		
+		do {
+		
+			System.out.println("\nWhat experience do you have with tennis:");
+			System.out.println("   Beginning   1.0 Just starting to play tennis\n" + 
+					"       |       1.5 Limited experience, still working on getting the ball into play\n" + 
+					"       |       2.0 Needs on-court experience, has obvious stroke weaknesses but familiar with basic positions for singles and doubles\n\n" + 
+					
+					"       |       2.5 Learning to judge where the ball is going, though court coverage is weak. Can do short rallies of slow pace\n" + 
+					"       |       3.0 Fairly consistent when hitting medium-paced shots, but not that comfortable with directional control, depth or power.\n" + 
+					"       |       3.5 Has improved stroke dependability with directional control on moderate shots, but lacks depth and variety. Has aggressive net play and improved court coverage\n\n" + 
+					
+					"       |       4.0 Dependable strokes, including directional control and depth on both forehand and backhand, plus the ability to use lobs, overheads, approach shots and volleys\n" + 
+					"       |       4.5 Starting to use power and spins and beginning to handle pace. Has sound footwork, can control shot depth and vary game plan according to opponents. Can hit first serves with power and accuracy\n" + 
+					"       |       5.0 Good shot anticipation and has an outstanding shot or exceptional consistency. Often hits winners or forces errors off of short balls. Can put away volleys and execute lobs, drop shots, half volleys and overheads\n\n" +
+					
+					"       |       5.5 Has developed power and/or consistency as a major weapon. Can vary strategies in a competitive situation and hit dependable shots in a stress situation\n" + 
+					"       |       6.0 Has obtained a sectional or national ranking\n" + 
+					"       |       6.5 Has extensive satellite tournament experience\n" + 
+					"      Pro      7.0 Makes most of their income from tennis");
+			
+			rating = userInput5.nextDouble();
+		} while ((rating < 1.0) || (rating > 7.0));
+		
+		userInput5.close();
+		return rating;
+	}
+	
 	
 	public static void addPlayer(Player dude)
 	{
@@ -88,7 +165,7 @@ public class MenuDriven {
 		
 	}
 	
-	public void generatePlayers(ArrayList<Player> association)
+	public void generatePlayers(ArrayList association)
 	{
 		Random rand = new Random();
 		
@@ -112,7 +189,7 @@ public class MenuDriven {
 				while(input3.hasNextLine())
 				{
 					String name = input3.nextLine();
-					name = name;
+					name = name + " Harris";
 					boolean legit = false;
 					
 					//Coordinate checking loop
@@ -127,7 +204,7 @@ public class MenuDriven {
 						legit = Picture.testColor(row, col, USMap);
 					}while(legit = false);
 					
-					//////
+				
 					double rate = rand.nextInt(8) + 1;
 					int subtract = rand.nextInt(2);
 					if(subtract == 1)
@@ -163,7 +240,7 @@ public class MenuDriven {
 				while(input.hasNextLine())
 				{
 					String name = input.nextLine();
-					
+					name = name + " Pendergast";
 					boolean legit;
 					
 					//Coordinate checking loop
@@ -199,33 +276,13 @@ public class MenuDriven {
 					addPlayer(player);
 				}
 			
-				String cool = "LastNames.txt"; //Male File
-				File fi = new File(yay);
-				Scanner input5 = null;
-				try
-				{
-					input5 = new Scanner(fi);
-				}
-				catch (FileNotFoundException ex)
-				{
-					System.out.println("*** Cannot open " + cool + " ***");
-					System.exit(1);  // quit the program
-				} 
-
-				int lastCount = 0;
-				while(input5.hasNextLine())
-				{
-					String lastName = input5.nextLine();
-					association.get(lastCount).addLastName(lastName);
-					association.get(1999-lastCount).addLastName(lastName);
-					lastCount++;
-				}
 			
 			
 			
 			//RATE PROPERTY
 		
 			
+		
 	}
 
 	
