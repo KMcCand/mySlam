@@ -4,8 +4,8 @@ public class Player {
 
 	// do we want these to be private????
 	public String name, gender;
-	public int serve, cash, age, row, col;
-	public double rating /* ,drating */;
+	public int cash, age, row, col;
+	public double rating;
 	
 	public final double maxDist = 30.0;
 	
@@ -13,12 +13,11 @@ public class Player {
 		
 	}
 	
-	public Player(String tname, String theGender, int tage, int tserve, int tcash, double tsrating, int theRow, int theCol)
+	public Player(String tname, String theGender, int tage, int tcash, double tsrating, int theRow, int theCol)
 	{
 		name = tname;
 		gender = theGender;
 		age = tage;
-		serve = tserve;
 		cash = tcash;
 		rating = tsrating;
 		row = theRow;
@@ -50,11 +49,6 @@ public class Player {
 		return milesDist;
 	}
 	
-	public int getServe()
-	{
-		return serve;
-	}
-	
 	public void setSinglesRating(double newRate)
 	{
 		rating = newRate;
@@ -83,7 +77,7 @@ public class Player {
 	public String toString()
 	{
 		String string = "";
-		string = string + "name: " + name + " age: " + age + " Serve: " + serve + " Cash: " + cash + "Rating: " + rating;
+		string = string + "Name: " + name + " Age: " + age + " Cash: " + cash + " Rating: " + rating;
 		return string;
 	}
 	
@@ -108,6 +102,14 @@ public class Player {
 		}
 		
 		SinglesMatch goodMatch = new SinglesMatch(playThisGuy, this, association);
+	}
+	
+	public void makeDoublesMatch(ArrayList<Player> association) {
+		
+	}
+	
+	public void makeDoublesMatch(ArrayList<Player> association, Player myPartner) {
+		
 	}
 	
 }

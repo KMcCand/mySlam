@@ -44,7 +44,7 @@ public class PictureTester {
 					System.out.println("Invalid input.");
 				}
 				else {
-					valid = Picture.testColor(row, col, USMap);
+					valid = Picture.testColor(row, col, USMap, false);
 				}
 			}
 			

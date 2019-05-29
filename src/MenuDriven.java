@@ -11,7 +11,7 @@ public class MenuDriven {
 	public static ArrayList<Player> association = new ArrayList<Player>();
 	
 	public static void main(String[] args) {
-		Scanner userinput = new Scanner(System.in);
+		Scanner userInput = new Scanner(System.in);
 		
 		System.out.println("Welcome to our match finding program!!!");
 		System.out.println("To start off, enter your basic information\n-----------------------------------------------");
@@ -22,25 +22,72 @@ public class MenuDriven {
 		
 		int x = Integer.parseInt(input.substring(0, input.indexOf(" ")));
 		int y = Integer.parseInt(input.substring(input.indexOf(" ") + 1));	
+		Player user = null;
 		
-		System.out.println("--------------------------------------------------\nDo you want to enter advanced settings?");
-		System.out.println("(Preferences on fitness and social levels, serve speed, playing up or down, etc)");
-		
-		System.out.println("Enter your serve speed to the nearest mph: ");
-		int serve = userinput.nextInt();
 		if (gender == 1) {
-			Player user = new Player(name, "male", age, serve, 0, rating, x, y);
+			user = new Player(name, "male", age, 0, rating, x, y);
 			addPlayer(user, association);
 		}
-		else if (gender == 2) {
-			Player user = new Player(name, "female", age, serve, 0, rating, x , y);
+		else {
+			user = new Player(name, "female", age, 0, rating, x , y);
 			addPlayer(user, association);
 		}
 		
+		
+		System.out.println("Your stats: " + user.toString() + "\n");
+		
+		System.out.println("All the registered Players:\n\n");
 		generatePlayers(association);
 		printList(association);
 		
-		userinput.close();
+		int userChoice;
+		do {
+			
+			do {
+				
+				System.out.println("What do you want to do:");
+				System.out.println("	Play a Singles Match - (1)");
+				System.out.println("	Play a Doubles Match - (2)");
+				System.out.println("	Play a Mixed Doubles Match - (3)");
+				System.out.println("	Add Money to your account - (4)");
+				System.out.println("	Quit (0)");
+				
+				userChoice = userInput.nextInt();
+				
+			} while ((userChoice < 0) || (userChoice > 4));
+			
+			switch(userChoice) {
+			case 1:
+				user.makeSinglesMatch(association);
+				break;
+			case 2:
+				user.makeDoublesMatch(association);
+				break;
+			case 3:
+				user.makeMixedDoublesMatch(association);
+				break;
+			case 4:
+				System.out.print("How much money do you want to add: ");
+				int addMoney = userInput.nextInt();
+				user.addPay(addMoney);
+				break;
+			}	
+			
+		}while (userChoice != 0);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		userInput.close();
 	}
 	
 	public static String locInput() {
@@ -52,8 +99,8 @@ public class MenuDriven {
 	}
 	
 	public static String nameInput() {
+		Scanner userInput = new Scanner(System.in);
 		boolean valid = true;
-		Scanner userInput2 = new Scanner(System.in);
 		String name = "";
 		
 		do {
@@ -62,7 +109,7 @@ public class MenuDriven {
 			}
 			
 			System.out.println("\nWhat do you like to be called (First Last)?");
-			name = userInput2.nextLine();
+			name = userInput.nextLine();
 			
 			valid = true;
 			name = name.trim();
@@ -76,12 +123,11 @@ public class MenuDriven {
 		Character.toUpperCase(name.charAt(0));
 		Character.toUpperCase(name.charAt(name.indexOf(' ') + 1));
 		
-		userInput2.close();
 		return name;
 	}
 	
 	public static int genderInput() {
-		Scanner userInput3 = new Scanner(System.in);
+		Scanner userInput = new Scanner(System.in);
 		int gender = 1;
 		
 		do {
@@ -89,16 +135,15 @@ public class MenuDriven {
 				System.out.println("Invalid input, try again.");
 			}
 			System.out.println("\nWhat gender would you prefer to play as?\n1. Male, 2. Female");
-			gender = userInput3.nextInt();
+			gender = userInput.nextInt();
 			
 		} while ((gender < 1) || (gender > 2));
 		
-		userInput3.close();
 		return gender;
 	}
 	
 	public static int ageInput() {
-		Scanner userInput4 = new Scanner(System.in);
+		Scanner userInput = new Scanner(System.in);
 		int age = 30, lastEnteredAge = 30;
 		
 		do {
@@ -113,21 +158,20 @@ public class MenuDriven {
 				System.out.println("Maybe you shouldn't be playing tennis. Enter your age again.");
 			}
 			System.out.println("\nWhat is your age?");
-			age = userInput4.nextInt();
+			age = userInput.nextInt();
 			
 			if (age == lastEnteredAge) {
-				userInput4.close();
+				userInput.close();
 				return age;
 			}
 			
 		} while ((age < 5) || (age > 100));	
 		
-		userInput4.close();
 		return age;
 	}
 	
 	public static double ratingInput() {
-		Scanner userInput5 = new Scanner(System.in);
+		Scanner userInput = new Scanner(System.in);
 		double rating;
 		
 		do {
@@ -150,10 +194,9 @@ public class MenuDriven {
 					"       |       6.5 Has extensive satellite tournament experience\n" + 
 					"      Pro      7.0 Makes most of their income from tennis");
 			
-			rating = userInput5.nextDouble();
+			rating = userInput.nextDouble();
 		} while ((rating < 1.0) || (rating > 7.0));
 		
-		userInput5.close();
 		return rating;
 	}
 	
@@ -205,7 +248,7 @@ public class MenuDriven {
 						row = rand.nextInt(557);
 						
 						Picture USMap = new Picture("images/USMap.jpg");
-						legit = Picture.testColor(row, col, USMap);
+						legit = Picture.testColor(row, col, USMap, true);
 					}while(legit = false);
 					
 					
@@ -224,7 +267,7 @@ public class MenuDriven {
 					//SERVE SPEED PROPERTY
 					int speed = rand.nextInt(50) + 70;
 					
-					Player player = new Player(name, "male", age, speed, cash, rate, col, row);
+					Player player = new Player(name, "male", age, cash, rate, col, row);
 					addPlayer(player, association);
 				}
 				
@@ -250,15 +293,16 @@ public class MenuDriven {
 					//Coordinate checking loop
 					int col = 0;
 					int row = 0;
+					
 					do {
 						
 						col = rand.nextInt(1000);
 						row = rand.nextInt(557);
 						
 						Picture USMap = new Picture("images/USMap.jpg");
-						legit = Picture.testColor(row, col, USMap);
+						legit = Picture.testColor(row, col, USMap, true);
 						
-					}while(legit = false);
+					} while(legit == false);
 					
 					
 					double rate = rand.nextInt(8) + 1;
@@ -276,7 +320,7 @@ public class MenuDriven {
 					//SERVE SPEED PROPERTY
 					int speed = rand.nextInt(50) + 70;
 					
-					Player player = new Player(name, "female", age, speed, cash, rate, col, row);
+					Player player = new Player(name, "female", age, cash, rate, col, row);
 					addPlayer(player, association);
 				}
 			
