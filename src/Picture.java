@@ -598,15 +598,16 @@ public class Picture extends SimplePicture
   }
   
   
-  public static boolean testColor(int row, int col, Picture testImage) {
+  public static boolean testColor(int row, int col, Picture testImage, boolean generating) {
 	  Pixel[][] array = testImage.getPixels2D();
 	  Pixel selected = array[row][col];
 	  
 	  if (selected.getRed() == 255) {
 		  if (selected.getGreen() == 255) {
 			  if (selected.getBlue() == 255) {
-				  
-				  System.out.println("Those coordinates are in a foreign country.");
+				  if (! generating) {
+					  System.out.println("Those coordinates are in a foreign country.");
+				  }
 				  return false;
 			  }
 		  }
@@ -614,8 +615,9 @@ public class Picture extends SimplePicture
 	  else if (selected.getRed() == 184) {
 		  if (selected.getGreen() == 229) {
 			  if (selected.getBlue() == 250) {
-				  
-				  System.out.println("Those coordinates are in the ocean.");
+				  if (! generating) {
+					  System.out.println("Those coordinates are in the ocean.");
+				  }
 				  return false;
 			  }
 		  }

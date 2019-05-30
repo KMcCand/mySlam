@@ -1,7 +1,6 @@
-import java.util.Collections;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.ArrayList;
+
 public class DoublesMatch extends Match {
 	
 	public DoublesMatch() {
@@ -9,6 +8,8 @@ public class DoublesMatch extends Match {
 	}
 	
 	public DoublesMatch(Player team1First, Player team1Second, Player team2First, Player team2Second, ArrayList<Player> association) {
+		
+		System.out.print(team1First.toString() + " and " + team1Second.toString() + " versus " + team2First.toString() + " and " + team2Second.toString()); 
 		enterTime();
 		
 		playRow = (findRow(team1First, team1Second) + findRow(team2First, team2Second)) / 2;

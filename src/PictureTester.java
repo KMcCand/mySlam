@@ -27,8 +27,6 @@ public class PictureTester {
 				System.out.print("Try again.\n\n");
 			}
 			valid = true;
-			
-			System.out.print("Use the zoom function in the upper left to enter (row, column): ");
 			line = userInput.nextLine();
 			spacePos = line.indexOf(' ');
 			
@@ -46,7 +44,7 @@ public class PictureTester {
 					System.out.println("Invalid input.");
 				}
 				else {
-					valid = Picture.testColor(row, col, USMap);
+					valid = Picture.testColor(row, col, USMap, false);
 				}
 			}
 			
