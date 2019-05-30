@@ -83,33 +83,117 @@ public class Player {
 	
 	public void makeSinglesMatch(ArrayList<Player> association) {
 		
-		// do we want to avoid males playing females? if so, move this to male / female and make it gender specific. 
-		// I think its ok for males to play females, in which case we leave this here. 
+		Player playThisGuy = findRightPlayer(association);
+		SinglesMatch goodMatch = new SinglesMatch(this, playThisGuy, association);
+	}
+	
+	public void makeDoublesMatch(ArrayList<Player> association) {
+		
+		Player myPartner = findRightPlayer(association);
+		makeDoublesMatch(association, myPartner);
+	}
+	
+	public void makeDoublesMatch(ArrayList<Player> association, Player myPartner) {
+		
+		if (myPartner.getGender() == gender) {
+			
+			double medRating = ((double) rating + myPartner.getSinglesRating()) / 2;
+			
+			double minRatingDif = Integer.MAX_VALUE, secondMinRatingDif = Integer.MAX_VALUE;
+			Player team2First = new Player();
+			Player team2Second = new Player();
+			
+			for (Player onePlayer : association) {
+				
+				if (distanceMiles(onePlayer) < maxDist) {
+					
+					if (! onePlayer.equals(myPartner)) {
+						
+						if (onePlayer.getGender() == gender) {
+					
+							double ratingDif = Math.abs(onePlayer.getSinglesRating() - medRating);
+							
+							if (ratingDif < minRatingDif) {
+								secondMinRatingDif = minRatingDif;
+								team2First = team2Second;
+								
+								minRatingDif = ratingDif;
+								team2Second = onePlayer;
+							}
+						}
+					}
+				}
+			}
+			
+			
+			DoublesMatch goodDubsMatch = new DoublesMatch(this, myPartner, team2First, team2Second, association);
+		}
+		
+		else {
+			System.out.print("Your partner is not the same gender as you. You should consider playing mixecd doubles.");
+		}
+	}
+	
+	public void makeMixedDoublesMatch(ArrayList<Player> association) {
+		
+	}
+	
+	public void makeMixedDoublesMatch(ArrayList<Player> association, Player myPartner) {
+		if (myPartner.getGender() != gender) {
+			
+			double minRatingDif = Integer.MAX_VALUE, secondMinRatingDif = Integer.MAX_VALUE;
+			Player team2First = new Player();
+			Player team2Second = new Player();
+			
+			for (Player onePlayer : association) {
+				
+				if (distanceMiles(onePlayer) < maxDist) {
+					
+					if (! onePlayer.equals(myPartner)) {
+						
+						if (onePlayer.getGender() == gender) {
+					
+							double ratingDif = Math.abs(onePlayer.getSinglesRating() - medRating);
+							
+							if (ratingDif < minRatingDif) {
+								secondMinRatingDif = minRatingDif;
+								team2First = team2Second;
+								
+								minRatingDif = ratingDif;
+								team2Second = onePlayer;
+							}
+						}
+						else {
+							
+						}
+					}
+				}
+			}
+			
+			
+			DoublesMatch goodDubsMatch = new DoublesMatch(this, myPartner, team2First, team2Second, association);
+	}
+	
+	public Player findRightPlayer(ArrayList<Player> association) {
 		
 		double minRatingDif = Integer.MAX_VALUE;
 		Player playThisGuy = new Player();
 		
 		for (Player onePlayer : association) {
 			if (distanceMiles(onePlayer) < maxDist) {
+				if (onePlayer.getGender() == gender) {
 				
-				double ratingDif = Math.abs(onePlayer.getSinglesRating() - rating);
-				
-				if (ratingDif < minRatingDif) {
-					minRatingDif = ratingDif;
-					playThisGuy = onePlayer;
+					double ratingDif = Math.abs(onePlayer.getSinglesRating() - rating);
+					
+					if (ratingDif < minRatingDif) {
+						minRatingDif = ratingDif;
+						playThisGuy = onePlayer;
+					}
 				}
 			}
 		}
 		
-		SinglesMatch goodMatch = new SinglesMatch(playThisGuy, this, association);
-	}
-	
-	public void makeDoublesMatch(ArrayList<Player> association) {
-		
-	}
-	
-	public void makeDoublesMatch(ArrayList<Player> association, Player myPartner) {
-		
+		return playThisGuy;
 	}
 	
 }
