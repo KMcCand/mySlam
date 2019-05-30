@@ -74,11 +74,8 @@ public class Player {
 		return col;
 	}
 	
-	public String toString()
-	{
-		String string = "";
-		string = string + "Name: " + name + " Age: " + age + " Cash: " + cash + " Rating: " + rating;
-		return string;
+	public String toString() {
+		 return name + " |  " + age + " years old, " + cash + " dollars. Rating: " + rating;
 	}
 	
 	public void makeSinglesMatch(ArrayList<Player> association) {

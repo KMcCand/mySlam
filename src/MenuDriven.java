@@ -11,7 +11,10 @@ public class MenuDriven {
 	public static ArrayList<Player> association = new ArrayList<Player>();
 	
 	public static void main(String[] args) {
+		System.out.print("Generating players, please wait...");
+		
 		Scanner userInput = new Scanner(System.in);
+		generatePlayers(association);
 		
 		System.out.println("Welcome to our match finding program!!!");
 		System.out.println("To start off, enter your basic information\n-----------------------------------------------");
@@ -37,15 +40,13 @@ public class MenuDriven {
 		System.out.println("Your stats: " + user.toString() + "\n");
 		
 		System.out.println("All the registered Players:\n\n");
-		generatePlayers(association);
 		printList(association);
 		
 		int userChoice;
 		do {
-			
 			do {
 				
-				System.out.println("What do you want to do:");
+				System.out.println("\n\nWhat do you want to do:");
 				System.out.println("	Play a Singles Match - (1)");
 				System.out.println("	Play a Doubles Match - (2)");
 				System.out.println("	Play a Mixed Doubles Match - (3)");
@@ -243,82 +244,82 @@ public class MenuDriven {
 	
 	public static void generatePlayers(ArrayList<Player> association)
 	{
-				
+		Picture USMap = new Picture("images/USMap.jpg");		
+		
+		
+		// READ IN BOY NAMES
 		String pathname = "Male.txt"; 
 		File file = new File(pathname);
 		
-		Scanner input3 = null;
-		try
-		{
-			input3 = new Scanner(file);
+		Scanner maleInput = null;
+		try {
+			maleInput = new Scanner(file);
 		}
-		catch (FileNotFoundException ex)
-		{
+		catch (FileNotFoundException ex) {
+			
 			System.out.println("*** Cannot open " + pathname + " ***");
 			System.exit(1);  // quit the program
 		} 
 
-		while(input3.hasNextLine())
-		{
-			String name = input3.nextLine();
+		while(maleInput.hasNextLine()) {
 			
-			// add to check to make sure name is legal name 
-			addPlayer(makeRandPlayer(name), association);
+			String name = maleInput.nextLine();
+			addPlayer(makeRandPlayer(name, USMap), association);
 		}
-				
+		
+		
+		// READ IN GIRL NAMES
 		pathname = "Female.txt"; 
 		file = new File(pathname);
 		
-		Scanner input = null;
-		try
-		{
-			input = new Scanner(file);
+		Scanner femaleInput = null;
+		try {
+			femaleInput = new Scanner(file);
 		}
-		catch (FileNotFoundException ex)
-		{
+		catch (FileNotFoundException ex) {
+			
 			System.out.println("*** Cannot open " + pathname + " ***");
 			System.exit(1);  // quit the program
 		} 
 
-		while(input.hasNextLine())
-		{
-			String name = input.nextLine();	
-			// add check to make sure name is valid 
-			addPlayer(makeRandPlayer(name), association);		
+		while(femaleInput.hasNextLine()) {
+			
+			String name = femaleInput.nextLine();	 
+			addPlayer(makeRandPlayer(name, USMap), association);		
 		}
 			
+		
+		// ADD ON LAST NAMES
 		pathname = "LastNames.txt";
 		file = new File(pathname);
-		Scanner input5 = null;
+		Scanner lastInput = null;
 		
-		try
-		{
-			input5 = new Scanner(file);
+		try {
+			lastInput = new Scanner(file);
 		}
-		catch (FileNotFoundException ex)
-		{
+		catch (FileNotFoundException ex) {
+			
 			System.out.println("*** Cannot open " + pathname + " ***");
 			System.exit(1);  // quit the program
 		} 
 
 		int lastCount = 0;
-		
-		while(input5.hasNextLine())
-		{
+		while(lastInput.hasNextLine()) {
 			
-			String lastName = input5.nextLine();
+			String lastName = lastInput.nextLine().toLowerCase();
+			Character.toUpperCase(lastName.charAt(0));
+			
 			association.get(lastCount).addLastName(lastName);
-			
 			association.get(1999-lastCount).addLastName(lastName);
+			
 			lastCount++;
 			
 		}
 	}
 
 	
-	public static Player makeRandPlayer(String name) {
+	public static Player makeRandPlayer(String name, Picture USMap) {
 		Random rand = new Random();
-		Picture USMap = new Picture("images/USMap.jpg");
 		
 		//Coordinate checking loop
 		boolean legit = false;
