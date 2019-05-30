@@ -1,13 +1,13 @@
 //package mySlam;
 import java.util.ArrayList;
+
 public class Player {
 
-	// do we want these to be private????
-	public String name, gender;
-	public int cash, age, row, col;
-	public double rating;
+	private String name, gender;
+	private int cash, age, row, col;
+	private double rating;
 	
-	public final double maxDist = 30.0;
+	private final double maxDist = 40.0;
 	
 	public Player() {
 		
@@ -83,13 +83,13 @@ public class Player {
 	
 	public void makeSinglesMatch(ArrayList<Player> association) {
 		
-		Player playThisGuy = findRightPlayer(association);
+		Player playThisGuy = findRightPlayer(association, true);
 		SinglesMatch goodMatch = new SinglesMatch(this, playThisGuy, association);
 	}
 	
 	public void makeDoublesMatch(ArrayList<Player> association) {
 		
-		Player myPartner = findRightPlayer(association);
+		Player myPartner = findRightPlayer(association, true);
 		makeDoublesMatch(association, myPartner);
 	}
 	
@@ -136,12 +136,14 @@ public class Player {
 	
 	public void makeMixedDoublesMatch(ArrayList<Player> association) {
 		
+		Player myPartner = findRightPlayer(association, false);
+		makeMixedDoublesMatch(association, myPartner);
 	}
 	
 	public void makeMixedDoublesMatch(ArrayList<Player> association, Player myPartner) {
 		if (myPartner.getGender() != gender) {
 			
-			double minRatingDif = Integer.MAX_VALUE, secondMinRatingDif = Integer.MAX_VALUE;
+			double minRatingDif = Integer.MAX_VALUE, minRatingDif2 = Integer.MAX_VALUE;
 			Player team2First = new Player();
 			Player team2Second = new Player();
 			
@@ -153,35 +155,42 @@ public class Player {
 						
 						if (onePlayer.getGender() == gender) {
 					
-							double ratingDif = Math.abs(onePlayer.getSinglesRating() - medRating);
+							double ratingDif = Math.abs(onePlayer.getSinglesRating() - rating);
 							
 							if (ratingDif < minRatingDif) {
-								secondMinRatingDif = minRatingDif;
-								team2First = team2Second;
-								
+								team2First = onePlayer;
 								minRatingDif = ratingDif;
-								team2Second = onePlayer;
 							}
 						}
 						else {
 							
+							double ratingDif2 = Math.abs(onePlayer.getSinglesRating() - myPartner.getSinglesRating());
+							
+							if (ratingDif2 < minRatingDif2) {
+								team2Second = onePlayer;
+								minRatingDif2 = ratingDif2;
+							}
 						}
 					}
 				}
 			}
 			
-			
-			DoublesMatch goodDubsMatch = new DoublesMatch(this, myPartner, team2First, team2Second, association);
+			MixedDoublesMatch goodMixedDubsMatch = new MixedDoublesMatch(this, myPartner, team2First, team2Second, association);
+		}
+		
+		else {
+			System.out.print("Your partner has the same gender as you, so you cannot play mixed doubles. Consider playing doubles instead.");
+		}
 	}
 	
-	public Player findRightPlayer(ArrayList<Player> association) {
+	public Player findRightPlayer(ArrayList<Player> association, boolean sameGender) {
 		
 		double minRatingDif = Integer.MAX_VALUE;
 		Player playThisGuy = new Player();
 		
 		for (Player onePlayer : association) {
 			if (distanceMiles(onePlayer) < maxDist) {
-				if (onePlayer.getGender() == gender) {
+				if (sameGender == (onePlayer.getGender() == gender)) {
 				
 					double ratingDif = Math.abs(onePlayer.getSinglesRating() - rating);
 					
