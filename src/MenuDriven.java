@@ -57,41 +57,69 @@ public class MenuDriven {
 			} while ((userChoice < 0) || (userChoice > 4));
 			
 			switch(userChoice) {
+			
 			case 1:
 				user.makeSinglesMatch(association);
 				break;
+				
 			case 2:
-				user.makeDoublesMatch(association);
+				char havePartner;
+				
+				do {
+					System.out.print("Do you have a partner? (Y or N) ");
+					havePartner = userInput.next().charAt(0);
+					
+				} while ((havePartner != 'Y') && (havePartner != 'N') && (havePartner != 'y') && (havePartner != 'n')); 
+			
+				if ((havePartner == 'Y') || (havePartner == 'y')) {
+					
+					user.makeDoublesMatch(association, getPartnerFromName());
+					
+				}
+				
+				else {
+					
+					user.makeDoublesMatch(association);
+				}
 				break;
+				
 			case 3:
-				user.makeMixedDoublesMatch(association);
+				char haveMixedPartner;
+				
+				do {
+					System.out.print("Do you have a partner? (Y or N) ");
+					haveMixedPartner = userInput.next().charAt(0);
+					
+				} while ((haveMixedPartner != 'Y') && (haveMixedPartner != 'N') && (haveMixedPartner != 'y') && (haveMixedPartner != 'n')); 
+			
+				if ((haveMixedPartner == 'Y') || (haveMixedPartner == 'y')) {
+					
+					user.makeMixedDoublesMatch(association, getPartnerFromName());
+					
+				}
+				
+				else {
+					
+					user.makeMixedDoublesMatch(association);
+				}
 				break;
+				
 			case 4:
 				System.out.print("How much money do you want to add: ");
+				
 				int addMoney = userInput.nextInt();
 				user.addPay(addMoney);
 				break;
 			}	
 			
-		}while (userChoice != 0);
+		} while (userChoice != 0);
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		System.out.print("\n\nThanks for matchign with us. Come again!");
 		userInput.close();
 	}
 	
 	public static String locInput() {
-		//print the map to the screen
+		
 		System.out.println("\nUse the zoom function in the upper left to enter your location (row col):");
 		return PictureTester.getCoordinates();
 		//3.153 miles per pixel
@@ -216,10 +244,6 @@ public class MenuDriven {
 	public static void generatePlayers(ArrayList<Player> association)
 	{
 		Random rand = new Random();
-		
-		//player generation loop
-		//GET THE GENDER AND NAME
-			//LOCATION PROPERTY
 				
 				String yay = "Male.txt"; //Male File
 				File files = new File(yay);
@@ -362,7 +386,28 @@ public class MenuDriven {
 			System.out.println(p.toString());
 		}
 	}
-//hello
+	
+	
+	public static Player getPartnerFromName() {
+		Scanner userInput = new Scanner (System.in);
+		int index = 0;
+		
+		do {
+			
+			if (index == -1) {
+				System.out.println("That name is not in the association. Try again.");
+			}
+			
+			System.out.print("What is the name of your partner: ");
+			String partnerName = userInput.nextLine();
+			
+			index = findName(partnerName, association);
+			
+		} while (index == -1);
+		
+		return association.get(index);
+	}
+
 
 	public static int findName(String findThisName, ArrayList<Player> association) {
 		int start = 0, end = association.size(), mid;
