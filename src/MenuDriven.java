@@ -11,13 +11,13 @@ public class MenuDriven {
 	public static ArrayList<Player> association = new ArrayList<Player>();
 	
 	public static void main(String[] args) {
+		System.out.println("Welcome to our match finding program!!!");
 		System.out.print("Generating players, please wait...");
 		
 		Scanner userInput = new Scanner(System.in);
 		generatePlayers(association);
 		
-		System.out.println("Welcome to our match finding program!!!");
-		System.out.println("To start off, enter your basic information\n-----------------------------------------------");
+		System.out.println("\n\nTo start off, enter your basic information\n-----------------------------------------------");
 		
 		String input = locInput(), name = nameInput();
 		int gender = genderInput(), age = ageInput();
@@ -100,10 +100,7 @@ public class MenuDriven {
 				}
 				
 				else {
-					
 					user.makeMixedDoublesMatch(association);
-					
-					// useless comment
 				}
 				break;
 				
@@ -336,7 +333,7 @@ public class MenuDriven {
 					
 		} while(legit == false);
 				
-		double rating = rand.nextInt(13) + 1;
+		double rating = rand.nextInt(13) * 0.5 + 1;
 		int age = rand.nextInt(38) + 12;
 		
 		return new Player(name, "female", age, 0, rating, col, row);
