@@ -102,6 +102,8 @@ public class MenuDriven {
 				else {
 					
 					user.makeMixedDoublesMatch(association);
+					
+					// useless comment
 				}
 				break;
 				
