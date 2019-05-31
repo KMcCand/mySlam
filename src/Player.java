@@ -75,7 +75,7 @@ public class Player {
 	}
 	
 	public String toString() {
-		 return name + " |  " + age + " years old, " + cash + " dollars. Rating: " + rating;
+		 return name + " |  " + " Gender " + gender + " " + age + " years old, " + cash + " dollars. Rating: " + rating;
 	}
 	
 	public void makeSinglesMatch(ArrayList<Player> association) {
