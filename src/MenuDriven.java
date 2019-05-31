@@ -306,15 +306,12 @@ public class MenuDriven {
 		while(lastInput.hasNextLine()) {
 			
 			String lastName = lastInput.nextLine().toLowerCase();
-			char first = Character.toUpperCase(lastName.charAt(0));
-			
-			lastName = first + lastName.substring(1);
-			
+			lastName = Character.toUpperCase(lastName.charAt(0)) + lastName.substring(1);
+						
 			association.get(lastCount).addLastName(lastName);
 			association.get(1999-lastCount).addLastName(lastName);
 			
 			lastCount++;
-			
 		}
 	}
 
