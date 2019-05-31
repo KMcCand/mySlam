@@ -9,9 +9,9 @@ public class DoublesMatch extends Match {
 	
 	public DoublesMatch(Player team1First, Player team1Second, Player team2First, Player team2Second, ArrayList<Player> association) {
 		
-		System.out.print(team1First.toString() + " and " + team1Second.toString() + " versus " + team2First.toString() + " and " + team2Second.toString()); 
-		enterTime();
+		System.out.print(team1First.matchToString() + " and " + team1Second.matchToString() + " versus " + team2First.matchToString() + " and " + team2Second.matchToString()); 
 		
+		enterTime();
 		playRow = (findRow(team1First, team1Second) + findRow(team2First, team2Second)) / 2;
 		playCol = (findCol(team1First, team1Second) + findCol(team2First, team2Second)) / 2;
 		
@@ -38,11 +38,11 @@ public class DoublesMatch extends Match {
 			System.out.print("Enter their name: ");
 			String skippedName = userInput.next(); 
 			
-			int index = MenuDriven.findName(skippedName, association);
-			// WRITE OUR OWN BINARY SEARCH METHOD SCREW THIS 
+			int index = MenuDriven.findName(skippedName, association); 
 			association.get(index).addPay(-5);
 			
 			break;
+			
 		case 3:
 			boolean valid = true;
 			String winner1Name = "", winner2Name = "";

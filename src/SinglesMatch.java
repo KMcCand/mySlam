@@ -10,10 +10,9 @@ public class SinglesMatch extends Match{
 	Scanner userInput = new Scanner (System.in);
 		
 	public SinglesMatch(Player firstGuy, Player secondGuy, ArrayList<Player> association) {
-		System.out.print(firstGuy.toString() + " versus " + secondGuy.toString());
+		System.out.print(firstGuy.matchToString() + " versus " + secondGuy.matchToString());
 		
 		enterTime();
-		
 		playRow = findRow(firstGuy, secondGuy);
 		playCol = findCol(firstGuy, secondGuy);
 		

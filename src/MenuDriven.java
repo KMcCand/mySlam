@@ -28,11 +28,11 @@ public class MenuDriven {
 		Player user = null;
 		
 		if (gender == 1) {
-			user = new Player(name, "male", age, 0, rating, x, y);
+			user = new Player(name, true, age, 0, rating, x, y);
 			addPlayer(user, association);
 		}
 		else {
-			user = new Player(name, "female", age, 0, rating, x , y);
+			user = new Player(name, false, age, 0, rating, x , y);
 			addPlayer(user, association);
 		}
 		
@@ -114,7 +114,7 @@ public class MenuDriven {
 			
 		} while (userChoice != 0);
 		
-		System.out.print("\n\nThanks for matchign with us. Come again!");
+		System.out.print("\n\nThanks for matching with us. Come again!");
 		userInput.close();
 	}
 	
@@ -263,7 +263,7 @@ public class MenuDriven {
 		while(maleInput.hasNextLine()) {
 			
 			String name = maleInput.nextLine();
-			addPlayer(makeRandPlayer(name, USMap), association);
+			addPlayer(makeRandPlayer(name, USMap, true), association);
 		}
 		
 		
@@ -284,7 +284,7 @@ public class MenuDriven {
 		while(femaleInput.hasNextLine()) {
 			
 			String name = femaleInput.nextLine();	 
-			addPlayer(makeRandPlayer(name, USMap), association);		
+			addPlayer(makeRandPlayer(name, USMap, false), association);		
 		}
 			
 		
@@ -316,7 +316,7 @@ public class MenuDriven {
 	}
 
 	
-	public static Player makeRandPlayer(String name, Picture USMap) {
+	public static Player makeRandPlayer(String name, Picture USMap, boolean gender) {
 		Random rand = new Random();
 		
 		//Coordinate checking loop
@@ -335,7 +335,7 @@ public class MenuDriven {
 		double rating = rand.nextInt(13) * 0.5 + 1;
 		int age = rand.nextInt(38) + 12;
 		
-		return new Player(name, "female", age, 0, rating, col, row);
+		return new Player(name, gender, age, 0, rating, col, row);
 	}
 	
 	public static void printList(ArrayList<Player> association)

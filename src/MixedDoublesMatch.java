@@ -17,15 +17,8 @@ public class MixedDoublesMatch extends DoublesMatch {
 	}
 	
 	public boolean checkMixedTeam(Player firstOne, Player secondOne) {
-		if (firstOne.getGender().equals("female")) {
-			if (secondOne.getGender().contentEquals("male")) {
-				return true;
-			}
-		}
-		else if (firstOne.getGender().equals("male")) {
-			if (secondOne.getGender().equals("female")) {
-				return true;
-			}
+		if (firstOne.getGender() != secondOne.getGender()) {
+			return true;
 		}
 		return false;
 	}

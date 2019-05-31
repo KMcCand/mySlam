@@ -39,7 +39,7 @@ public abstract class Match {
 			}
 			valid = true;
 				
-			System.out.print("What time do you want to play (ex: 12/3 3:00 PM): ");
+			System.out.print("\nWhat time do you want to play (ex: 12/3 3:00 PM): ");
 			playTime = userInput.next();
 				
 			if (playTime.indexOf('/') == -1) {

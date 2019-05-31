@@ -3,7 +3,8 @@ import java.util.ArrayList;
 
 public class Player {
 
-	private String name, gender;
+	private String name;
+	private boolean gender;
 	private int cash, age, row, col;
 	private double rating;
 	
@@ -13,7 +14,7 @@ public class Player {
 		
 	}
 	
-	public Player(String tname, String theGender, int tage, int tcash, double tsrating, int theRow, int theCol)
+	public Player(String tname, boolean theGender, int tage, int tcash, double tsrating, int theRow, int theCol)
 	{
 		name = tname;
 		gender = theGender;
@@ -33,7 +34,7 @@ public class Player {
 		return rating;	
 	}
 	
-	public String getGender() {
+	public boolean getGender() {
 		return gender;
 	}
 	
@@ -74,8 +75,13 @@ public class Player {
 		return col;
 	}
 	
+	public String matchToString() {
+		return name + ", " + rating;
+	}
+	
 	public String toString() {
-		 return name + " |  " + " Gender " + gender + " " + age + " years old, " + cash + " dollars. Rating: " + rating;
+		// NOTE TO US: THE QUESTION MARK IS A LESS CODE WAY TO SAY MALE IF GENDER IS TRUE, FEMALE IF FALSE
+		return name + ", " + ((gender) ? "Male" : "Female") + " |  " + age + " years old, " + cash + " dollars. Rating: " + rating;
 	}
 	
 	public void makeSinglesMatch(ArrayList<Player> association) {
@@ -187,13 +193,18 @@ public class Player {
 		
 		for (Player onePlayer : association) {
 			if (distanceMiles(onePlayer) < maxDist) {
-				if (sameGender == (onePlayer.getGender() == gender)) {
 				
-					double ratingDif = Math.abs(onePlayer.getSinglesRating() - rating);
+				if (! onePlayer.equals(this)) {
 					
-					if (ratingDif < minRatingDif) {
-						minRatingDif = ratingDif;
-						playThisGuy = onePlayer;
+					if (sameGender == (onePlayer.getGender() == gender)) {
+						
+						double ratingDif = Math.abs(onePlayer.getSinglesRating() - rating);
+						
+						if (ratingDif < minRatingDif) {
+							
+							minRatingDif = ratingDif;
+							playThisGuy = onePlayer;
+						}
 					}
 				}
 			}
