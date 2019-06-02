@@ -8,8 +8,6 @@ public class Player {
 	private int cash, age, row, col;
 	private double rating;
 	
-	private final double maxDist = 40.0;
-	
 	public Player() {
 		
 	}
@@ -81,22 +79,22 @@ public class Player {
 	
 	public String toString() {
 		// NOTE TO US: THE QUESTION MARK IS A LESS CODE WAY TO SAY MALE IF GENDER IS TRUE, FEMALE IF FALSE
-		return name + ", " + ((gender) ? "Male" : "Female") + " |  " + age + " years old, " + cash + " dollars. Rating: " + rating;
+		return name + ", " + ((gender) ? 'M' : 'F') + " |  " + age + " years old, " + cash + " dollars. Rating: " + rating;
 	}
 	
-	public void makeSinglesMatch(ArrayList<Player> association) {
+	public void makeSinglesMatch(ArrayList<Player> association, double maxDist) {
 		
-		Player playThisGuy = findRightPlayer(association, true);
+		Player playThisGuy = findRightPlayer(association, true, maxDist);
 		SinglesMatch goodMatch = new SinglesMatch(this, playThisGuy, association);
 	}
 	
-	public void makeDoublesMatch(ArrayList<Player> association) {
+	public void makeDoublesMatch(ArrayList<Player> association, double maxDist) {
 		
-		Player myPartner = findRightPlayer(association, true);
-		makeDoublesMatch(association, myPartner);
+		Player myPartner = findRightPlayer(association, true, maxDist);
+		makeDoublesMatch(association, myPartner, maxDist);
 	}
 	
-	public void makeDoublesMatch(ArrayList<Player> association, Player myPartner) {
+	public void makeDoublesMatch(ArrayList<Player> association, Player myPartner, double maxDist) {
 		
 		if (myPartner.getGender() == gender) {
 			
@@ -137,13 +135,13 @@ public class Player {
 		}
 	}
 	
-	public void makeMixedDoublesMatch(ArrayList<Player> association) {
+	public void makeMixedDoublesMatch(ArrayList<Player> association, double maxDist) {
 		
-		Player myPartner = findRightPlayer(association, false);
-		makeMixedDoublesMatch(association, myPartner);
+		Player myPartner = findRightPlayer(association, false, maxDist);
+		makeMixedDoublesMatch(association, myPartner, maxDist);
 	}
 	
-	public void makeMixedDoublesMatch(ArrayList<Player> association, Player myPartner) {
+	public void makeMixedDoublesMatch(ArrayList<Player> association, Player myPartner, double maxDist) {
 		if (myPartner.getGender() != gender) {
 			
 			double minRatingDif = Integer.MAX_VALUE, minRatingDif2 = Integer.MAX_VALUE;
@@ -186,7 +184,7 @@ public class Player {
 		}
 	}
 	
-	public Player findRightPlayer(ArrayList<Player> association, boolean sameGender) {
+	public Player findRightPlayer(ArrayList<Player> association, boolean sameGender, double maxDist) {
 		
 		double minRatingDif = Integer.MAX_VALUE;
 		Player playThisGuy = new Player();

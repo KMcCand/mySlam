@@ -21,7 +21,7 @@ public class MenuDriven {
 		
 		String input = locInput(), name = nameInput();
 		int gender = genderInput(), age = ageInput();
-		double rating = ratingInput();
+		double rating = ratingInput(), maxDist = maxDistInput();
 		
 		int x = Integer.parseInt(input.substring(0, input.indexOf(" ")));
 		int y = Integer.parseInt(input.substring(input.indexOf(" ") + 1));	
@@ -29,11 +29,11 @@ public class MenuDriven {
 		
 		if (gender == 1) {
 			user = new Player(name, true, age, 0, rating, x, y);
-			addPlayer(user, association);
+			addPlayer(user);
 		}
 		else {
 			user = new Player(name, false, age, 0, rating, x , y);
-			addPlayer(user, association);
+			addPlayer(user);
 		}
 		
 		
@@ -60,7 +60,7 @@ public class MenuDriven {
 			switch(userChoice) {
 			
 			case 1:
-				user.makeSinglesMatch(association);
+				user.makeSinglesMatch(association, maxDist);
 				break;
 				
 			case 2:
@@ -74,13 +74,13 @@ public class MenuDriven {
 			
 				if ((havePartner == 'Y') || (havePartner == 'y')) {
 					
-					user.makeDoublesMatch(association, getPartnerFromName());
+					user.makeDoublesMatch(association, getPartnerFromName(), maxDist);
 					
 				}
 				
 				else {
 					
-					user.makeDoublesMatch(association);
+					user.makeDoublesMatch(association, maxDist);
 				}
 				break;
 				
@@ -95,12 +95,12 @@ public class MenuDriven {
 			
 				if ((haveMixedPartner == 'Y') || (haveMixedPartner == 'y')) {
 					
-					user.makeMixedDoublesMatch(association, getPartnerFromName());
+					user.makeMixedDoublesMatch(association, getPartnerFromName(), maxDist);
 					
 				}
 				
 				else {
-					user.makeMixedDoublesMatch(association);
+					user.makeMixedDoublesMatch(association, maxDist);
 				}
 				break;
 				
@@ -228,17 +228,23 @@ public class MenuDriven {
 		return rating;
 	}
 	
+	public static double maxDistInput() {
+		Scanner userInput = new Scanner (System.in);
+		
+		System.out.print("\nHow many miles are you willing to drive to play? ");
+		return userInput.nextInt() * 2;
+	}
 	
-	public static void addPlayer(Player dude, ArrayList<Player> association)
-	{
+	
+	public static void addPlayer(Player dude) {
+		
 		String name = dude.getName();
 		int index = 0;
 		
 		while ((index < association.size()) && (name.compareTo(association.get(index).getName()) > 0)) {
 			index ++;
 		}
-		association.add(index, dude);
-		
+		association.add(index, dude);	
 	}
 	
 	public static void generatePlayers(ArrayList<Player> association)
@@ -263,7 +269,7 @@ public class MenuDriven {
 		while(maleInput.hasNextLine()) {
 			
 			String name = maleInput.nextLine();
-			addPlayer(makeRandPlayer(name, USMap, true), association);
+			addPlayer(makeRandPlayer(name, USMap, true));
 		}
 		
 		
@@ -284,7 +290,7 @@ public class MenuDriven {
 		while(femaleInput.hasNextLine()) {
 			
 			String name = femaleInput.nextLine();	 
-			addPlayer(makeRandPlayer(name, USMap, false), association);		
+			addPlayer(makeRandPlayer(name, USMap, false));		
 		}
 			
 		
