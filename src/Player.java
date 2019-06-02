@@ -40,12 +40,17 @@ public class Player {
 	{
 		name = name + " " + last;
 	}
+	
 	public double distanceMiles(Player p2) {
 		
 		double pixelDist = Math.sqrt(Math.pow((double) (p2.getCol() - col), 2) + Math.pow((double) (p2.getRow() - row), 2));
-		double milesDist = pixelDist * 3.1538;
+		return pixelDist * 3.1538;
+	}
+	
+	public double distanceMiles(int theRow, int theCol) {
 		
-		return milesDist;
+		double pixelDist = Math.sqrt(Math.pow((double) (theCol - col), 2) + Math.pow((double) (theRow - row), 2));
+		return pixelDist * 3.1538;
 	}
 	
 	public void setSinglesRating(double newRate)

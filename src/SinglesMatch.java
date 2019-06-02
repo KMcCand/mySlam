@@ -10,17 +10,18 @@ public class SinglesMatch extends Match{
 	Scanner userInput = new Scanner (System.in);
 		
 	public SinglesMatch(Player firstGuy, Player secondGuy, ArrayList<Player> association) {
+		
 		System.out.print(firstGuy.matchToString() + " versus " + secondGuy.matchToString());
 		
 		enterTime();
-		playRow = findRow(firstGuy, secondGuy);
-		playCol = findCol(firstGuy, secondGuy);
+		giveDirections(findRow(firstGuy, secondGuy), findCol(firstGuy, secondGuy), firstGuy);
 		
 		enterWinner(association);
 	}
 		
 	public void enterWinner(ArrayList<Player> association) {
-		System.out.print("Who won the match? (If you decided not to play, enter 0, if they didn't show up, enter 1.)");
+		
+		System.out.print("\n\n\nWho won the match? (If you decided not to play, enter 0, if they didn't show up, enter 1.)");
 		String firstInput = userInput.next();
 			
 		if (firstInput.indexOf('1') > 0) {

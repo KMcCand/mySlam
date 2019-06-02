@@ -14,6 +14,7 @@ public class DoublesMatch extends Match {
 		enterTime();
 		playRow = (findRow(team1First, team1Second) + findRow(team2First, team2Second)) / 2;
 		playCol = (findCol(team1First, team1Second) + findCol(team2First, team2Second)) / 2;
+		giveDirections(playRow, playCol, team1First);
 		
 		enterWinner(association);
 	}
@@ -24,7 +25,7 @@ public class DoublesMatch extends Match {
 		
 		do {
 		
-			System.out.println("Choose:");
+			System.out.println("\n\n\n\nChoose:");
 			System.out.println("  1   Somebody didn't show up");
 			System.out.println("  2   You decided not to play");
 			System.out.println("  3   Enter a winner");
