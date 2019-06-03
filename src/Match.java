@@ -146,7 +146,7 @@ public abstract class Match {
 			}
 			valid = true;
 			
-			System.out.print("Enter the time when you want to play: (Ex: 3:00)");
+			System.out.print("Enter the time when you want to play: (Ex: 3:00) ");
 			temp = userInput.next().trim();
 			
 			if (temp.indexOf(':') == -1) {

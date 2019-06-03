@@ -346,9 +346,9 @@ public class MenuDriven {
 	
 	public static void printList(ArrayList<Player> association)
 	{
-		for(Player p: association)
+		for(int n = 0; n < association.size(); n ++)
 		{
-			System.out.println(p.toString());
+			System.out.println(n + " " + association.get(n).toString());
 		}
 	}
 	
