@@ -24,7 +24,7 @@ public class PictureTester {
 		
 		do {
 			if (valid == false) {
-				System.out.print("Try again.\n\n");
+				System.out.print("Invalid input, try again.\n\n");
 			}
 			valid = true;
 			line = userInput.nextLine();
@@ -32,7 +32,6 @@ public class PictureTester {
 			
 			if ((line.indexOf(',') > 0) || (spacePos == - 1)) {
 				valid = false;
-				System.out.println("Invalid input.");
 			}
 			else {
 				
@@ -41,7 +40,6 @@ public class PictureTester {
 
 				if ((row < 0) || (row > 724) || (col < 0) || (col > 999)) {
 					valid = false;
-					System.out.println("Invalid input.");
 				}
 				else {
 					valid = Picture.testColor(row, col, USMap, false);

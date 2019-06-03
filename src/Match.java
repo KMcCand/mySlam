@@ -32,8 +32,7 @@ public abstract class Match {
 	public void giveDirections(int playRow, int playCol, Player giveTo) {
 		String directions = "";
 		
-		double rowDif = playRow - giveTo.getRow(), colDif = playCol - giveTo.getCol();
-		double slope = rowDif / colDif;
+		double rowDif = giveTo.getRow() - playRow, colDif = playCol - giveTo.getCol();
 		double dist = giveTo.distanceMiles(playRow, playCol);
 		
 		if (colDif == 0) {
@@ -52,7 +51,18 @@ public abstract class Match {
 			}
 		}
 		
+		else if (rowDif == 0) {
+			
+			if (colDif > 0) {
+				directions = "To get there, head east for " + dist + " miles.";
+			}
+			else {
+				directions = "To get there, head west for " + dist + " miles.";
+			}
+		}
+		
 		else {
+			double slope = rowDif / colDif;
 			
 			if ((rowDif > 0) && (colDif > 0)) {
 				directions = directionsHelper("north", "north east", "east", true, slope);
@@ -115,7 +125,7 @@ public abstract class Match {
 			else {
 				int slashIndex = playTime.indexOf('/');
 				
-				if ((playTime.substring(0, slashIndex).length() > 2) || (playTime.substring(slashIndex).length() > 2)) {
+				if ((playTime.substring(0, slashIndex).length() > 2) || (playTime.substring(slashIndex + 1).length() > 2)) {
 					valid = false;
 					continue;
 				}

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Player {
 
-	private String name;
+	private String name = "";
 	private boolean gender;
 	private int cash, age, row, col;
 	private double rating;
@@ -90,13 +90,25 @@ public class Player {
 	public void makeSinglesMatch(ArrayList<Player> association, double maxDist) {
 		
 		Player playThisGuy = findRightPlayer(association, true, maxDist);
-		SinglesMatch goodMatch = new SinglesMatch(this, playThisGuy, association);
+		
+		if (playThisGuy.getName().equals("")) {
+			System.out.print("There are no players in your area.");
+		}
+		else {
+			SinglesMatch goodMatch = new SinglesMatch(this, playThisGuy, association);
+		}
 	}
 	
 	public void makeDoublesMatch(ArrayList<Player> association, double maxDist) {
 		
 		Player myPartner = findRightPlayer(association, true, maxDist);
-		makeDoublesMatch(association, myPartner, maxDist);
+		
+		if (myPartner.getName().equals("")) {
+			System.out.print("There are no partners in your area.");
+		}
+		else {
+			makeDoublesMatch(association, myPartner, maxDist);
+		}
 	}
 	
 	public void makeDoublesMatch(ArrayList<Player> association, Player myPartner, double maxDist) {
@@ -131,19 +143,29 @@ public class Player {
 				}
 			}
 			
-			
-			DoublesMatch goodDubsMatch = new DoublesMatch(this, myPartner, team2First, team2Second, association);
+			if (team2First.getName().equals(null) || team2Second.getName().equals(null)) {
+				System.out.print("There are no teams in your area.");
+			}
+			else {
+				DoublesMatch goodDubsMatch = new DoublesMatch(this, myPartner, team2First, team2Second, association);
+			}
 		}
 		
 		else {
-			System.out.print("Your partner is not the same gender as you. You should consider playing mixecd doubles.");
+			System.out.print("Your partner is not the same gender as you. You should consider playing mixed doubles.");
 		}
 	}
 	
 	public void makeMixedDoublesMatch(ArrayList<Player> association, double maxDist) {
 		
 		Player myPartner = findRightPlayer(association, false, maxDist);
-		makeMixedDoublesMatch(association, myPartner, maxDist);
+		
+		if (myPartner.getName().equals(null)) {
+			System.out.print("There are no partners in your area.");
+		}
+		else {
+			makeMixedDoublesMatch(association, myPartner, maxDist);
+		}
 	}
 	
 	public void makeMixedDoublesMatch(ArrayList<Player> association, Player myPartner, double maxDist) {
@@ -181,11 +203,16 @@ public class Player {
 				}
 			}
 			
-			MixedDoublesMatch goodMixedDubsMatch = new MixedDoublesMatch(this, myPartner, team2First, team2Second, association);
+			if (team2First.getName().equals(null) || team2Second.getName().equals(null)) {
+				System.out.print("There are no teams in your area.");
+			}
+			else {
+				MixedDoublesMatch goodMixedDubsMatch = new MixedDoublesMatch(this, myPartner, team2First, team2Second, association);
+			}
 		}
 		
 		else {
-			System.out.print("Your partner has the same gender as you, so you cannot play mixed doubles. Consider playing doubles instead.");
+			System.out.print("Your partner has the same gender as you, so you cannot play mixed doubles. Consider playing regular doubles instead.");
 		}
 	}
 	

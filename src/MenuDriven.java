@@ -105,10 +105,11 @@ public class MenuDriven {
 				break;
 				
 			case 4:
-				System.out.print("How much money do you want to add: ");
+				System.out.print("How many dollars do you want to add: ");
+				user.addPay(userInput.nextInt());
+				//System.out.println();
 				
-				int addMoney = userInput.nextInt();
-				user.addPay(addMoney);
+				System.out.print("You now have $" + user.getCash() + ".");
 				break;
 			}	
 			
@@ -185,11 +186,11 @@ public class MenuDriven {
 			else if (age > 100) {
 				System.out.println("Maybe you shouldn't be playing tennis. Enter your age again.");
 			}
+			
 			System.out.println("\nWhat is your age?");
 			age = userInput.nextInt();
 			
 			if (age == lastEnteredAge) {
-				userInput.close();
 				return age;
 			}
 			

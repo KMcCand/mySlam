@@ -21,7 +21,7 @@ public class SinglesMatch extends Match{
 		
 	public void enterWinner(ArrayList<Player> association) {
 		
-		System.out.print("\n\n\nWho won the match? (If you decided not to play, enter 0, if they didn't show up, enter 1.)");
+		System.out.print("\n\n\nWho won the match? (If you decided not to play, enter 0, if they didn't show up, enter 1.) ");
 		String firstInput = userInput.next();
 			
 		if (firstInput.indexOf('1') > 0) {
