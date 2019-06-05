@@ -11,6 +11,9 @@ public abstract class Match {
 	String playTime;
 	Player winner1, winner2;
 	
+	Player user, userPartner, them, themPartner;
+	ArrayList<Player> association;
+	
 	public Match() {
 		playRow = 0;
 		playCol = 0;
@@ -19,7 +22,7 @@ public abstract class Match {
 		winner2 = new Player();
 	}
 	
-	public abstract void enterWinner(ArrayList<Player> association);
+	public abstract void enterWinner();
 	
 	public int findRow(Player firstGuy, Player secondGuy) {
 		return (firstGuy.getRow() + secondGuy.getRow()) / 2;
@@ -30,7 +33,7 @@ public abstract class Match {
 	}
 	
 	public void giveDirections(int playRow, int playCol, Player giveTo) {
-		String directions = "";
+		String directions = "", playTime = enterTime();
 		
 		double rowDif = giveTo.getRow() - playRow, colDif = playCol - giveTo.getCol();
 		double dist = giveTo.distanceMiles(playRow, playCol);
@@ -82,7 +85,7 @@ public abstract class Match {
 			
 			directions = "To get there, head " + directions + " for " + dist + " miles.";
 		}	
-		System.out.print("\nYou will play at (" + playRow + ", " + playCol + ").");
+		System.out.print("\nYou will play at (" + playRow + ", " + playCol + "), on " + playTime);
 		System.out.print("\n" + directions);
 	}
 	
@@ -119,6 +122,10 @@ public abstract class Match {
 			System.out.print("\nOn what day do you want to play? (Ex: 4/22) ");
 			playTime = userInput.nextLine().trim();
 				
+			if (playTime.length() < 3) {
+				valid = false;
+				continue;
+			}
 			if (playTime.indexOf('/') == -1) {
 				valid = false;
 			}
@@ -159,17 +166,23 @@ public abstract class Match {
 			System.out.print("Enter the time when you want to play: (Ex: 3:00) ");
 			temp = userInput.next().trim();
 			
+			if (temp.length() < 4) {
+				valid = false;
+				continue;
+			}
 			if (temp.indexOf(':') == -1) {
 				valid = false;
 				continue;
 			}
 			for (int n = 0; n < 4; n ++) {
-				if (n == 1) {
-					n ++;
-				}
-				if (! Character.isDigit(temp.charAt(n))) {
-					valid = false;
-					break;
+				
+				if (n != temp.indexOf(':')) {
+					
+					if (! Character.isDigit(temp.charAt(n))) {
+						
+						valid = false;
+						continue;
+					}
 				}
 			}
 		} while (! valid);
@@ -183,7 +196,7 @@ public abstract class Match {
 			AMPM = "PM";
 		}
 		
-		return "Date: " + playTime + " Time: " + temp + " " + AMPM;
+		return playTime + " at " + temp + " " + AMPM + ".";
 	}
 	
 	public String getPlayTime() {
@@ -196,6 +209,53 @@ public abstract class Match {
 	
 	public int getPlayCol() {
 		return playCol;
+	}
+	
+	public void addThePay(Player guy, double payAmount) {
+		
+		association.get(MenuDriven.findName(guy.getName(), association)).addPay(payAmount);
+	}
+	
+	public void changeRating(Player winner, Player loser) {
+		
+		if (winner.getSinglesRating() <= loser.getSinglesRating()) {
+			
+			winner.addSinglesRating(0.1);
+			loser.addSinglesRating(-0.1);
+			
+			System.out.println("The new ratings:");
+			System.out.println("  " + winner.matchToString());
+			System.out.println("  " + loser.matchToString());
+		}
+		else {
+			System.out.println("You ratings did not change.");
+		}
+		
+	}
+	
+	public void changeRating(Player winner1, Player winner2, Player loser1, Player loser2) {
+		
+		if (avRating(winner1, winner2) <= avRating(loser1, loser2)) {
+			
+			winner1.addSinglesRating(0.1);
+			winner2.addSinglesRating(0.1);
+			
+			loser1.addSinglesRating(-0.1);
+			loser2.addSinglesRating(-0.1);
+			
+			System.out.println("The new ratings:");
+			System.out.println("  " + winner1.matchToString());
+			System.out.println("  " + winner2.matchToString());
+			System.out.println("  " + loser1.matchToString());
+			System.out.println("  " + loser2.matchToString());
+		}
+		else {
+			System.out.println("Your ratings didn't change.");
+		}
+	}
+	
+	public double avRating(Player first, Player second) {
+		return ((first.getSinglesRating() + second.getSinglesRating()) / 2);
 	}
 	
 }

@@ -8,41 +8,54 @@ import java.util.Scanner;
 public class SinglesMatch extends Match{
 
 	Scanner userInput = new Scanner (System.in);
+	
 		
-	public SinglesMatch(Player firstGuy, Player secondGuy, ArrayList<Player> association) {
+	public SinglesMatch(Player firstGuy, Player secondGuy, ArrayList<Player> theAssociation) {
+		user = firstGuy;
+		them = secondGuy;
+		association = theAssociation;
 		
 		System.out.print(firstGuy.matchToString() + " versus " + secondGuy.matchToString());
-		
-		enterTime();
 		giveDirections(findRow(firstGuy, secondGuy), findCol(firstGuy, secondGuy), firstGuy);
 		
-		enterWinner(association);
+		enterWinner();
 	}
 		
-	public void enterWinner(ArrayList<Player> association) {
+	public void enterWinner() {
 		
-		System.out.print("\n\n\nWho won the match? (If you decided not to play, enter 0, if they didn't show up, enter 1.) ");
-		String firstInput = userInput.next();
-			
-		if (firstInput.indexOf('1') > 0) {
-				
-			System.out.print("What was their name: ");
-			String skippedName = userInput.next(); 
-			
-			int index = MenuDriven.findName(skippedName, association);
-			association.get(index).addPay(-5);
-		}
-			
-		else if (firstInput.indexOf('0') == - 1) {
-				
-			String winnerName = userInput.next();
-			int index = MenuDriven.findName(winnerName, association);
-			association.get(index).addPay(5);
-			winner1 = association.get(index);
-		}
-	}
+		int userChoice = 4;
 		
-	public Player getWinner() {
-		return winner1;
+		do {
+			System.out.println("\n\n\nWhat was the outcome?");
+			System.out.println("  1 - They won");
+			System.out.println("  2 - You won");
+			System.out.println("  3 - They didn't show up");
+			System.out.println("  4 - You guys decided not to play");
+			
+			userChoice = userInput.nextInt();
+			
+		} while ((userChoice < 1) || (userChoice > 4));
+			
+		switch (userChoice) {
+		
+		case 1:
+			addThePay(them, 5);
+			System.out.print("They have been given $5.00.");
+			changeRating(them, user);
+			
+			break;
+			
+		case 2:
+			addThePay(user, 5);
+			System.out.print("You have been given $5.00.");
+			changeRating(user, them);
+			
+			break;
+			
+		case 3:
+			addThePay(them, -5);
+			System.out.print("They have been fined $5.00.");
+			break;
+		}
 	}
 }

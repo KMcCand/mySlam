@@ -36,13 +36,13 @@ public class MenuDriven {
 			addPlayer(user);
 		}
 		
-		
-		System.out.println("Your stats: " + user.toString() + "\n");
-		
+
 		System.out.println("All the registered Players:\n\n");
 		printList(association);
+		System.out.println("\n-------------------------------------------------------------------");
 		
 		int userChoice;
+		
 		do {
 			do {
 				

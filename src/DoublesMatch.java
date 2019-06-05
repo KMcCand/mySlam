@@ -7,85 +7,65 @@ public class DoublesMatch extends Match {
 		
 	}
 	
-	public DoublesMatch(Player team1First, Player team1Second, Player team2First, Player team2Second, ArrayList<Player> association) {
+	public DoublesMatch(Player team1First, Player team1Second, Player team2First, Player team2Second, ArrayList<Player> theAssociation) {
+		
+		association = theAssociation;
+		user = team1First;
+		userPartner = team1Second;
+		them = team2First;
+		themPartner = team2Second;
 		
 		System.out.print(team1First.matchToString() + " and " + team1Second.matchToString() + " versus " + team2First.matchToString() + " and " + team2Second.matchToString()); 
 		
-		enterTime();
 		playRow = (findRow(team1First, team1Second) + findRow(team2First, team2Second)) / 2;
 		playCol = (findCol(team1First, team1Second) + findCol(team2First, team2Second)) / 2;
 		giveDirections(playRow, playCol, team1First);
 		
-		enterWinner(association);
+		enterWinner();
 	}
 	
-	public void enterWinner(ArrayList<Player> association) {
+	public void enterWinner() {
 		Scanner userInput = new Scanner (System.in);
 		int userChoice = 0;
 		
 		do {
 		
 			System.out.println("\n\n\n\nChoose:");
-			System.out.println("  1   Somebody didn't show up");
-			System.out.println("  2   You decided not to play");
-			System.out.println("  3   Enter a winner");
+			System.out.println("  1 - They won");
+			System.out.println("  2 - You won");
+			System.out.println("  3 - They didn't show up");
+			System.out.println("  4 - You guys decided not to play");
 			
 			userChoice = userInput.nextInt();
 			
-		} while ((userChoice < 1) || (userChoice > 3));
+		} while ((userChoice < 1) || (userChoice > 4));
 		
 		switch(userChoice) {
+		
 		case 1:
-			System.out.print("Enter their name: ");
-			String skippedName = userInput.next(); 
+			addThePay(them, 2.5);
+			addThePay(themPartner, 2.5);
 			
-			int index = MenuDriven.findName(skippedName, association); 
-			association.get(index).addPay(-5);
+			System.out.print("They have each been given $2.50.");
+			changeRating(them, themPartner, user, userPartner);
+			
+			break;
+			
+		case 2:
+			addThePay(user, 2.5);
+			addThePay(userPartner, 2.5);
+			
+			System.out.print("You have each been given $2.50.");
+			changeRating(user, userPartner, them, themPartner);
 			
 			break;
 			
 		case 3:
-			boolean valid = true;
-			String winner1Name = "", winner2Name = "";
+			addThePay(them, -2.5);
+			addThePay(themPartner, -2.5);
 			
-			do {
-				
-				if (valid = false) {
-					System.out.println("Invalid input. Try again.");
-				}
-			
-				System.out.print("Enter the team who won, separated by a space: ");
-				String winnerLine = userInput.next();
-				int spacePos = winnerLine.indexOf(' ');
-				
-				if (spacePos == -1) {
-					valid = false;
-				}
-				else {
-					winner1Name = winnerLine.substring(0, spacePos);
-					winner2Name = winnerLine.substring(spacePos + 1);
-				}
-				
-			} while (valid = false);
-			
-			int Winner1Index = MenuDriven.findName(winner1Name, association);
-			int Winner2Index = MenuDriven.findName(winner2Name, association);
-			
-			winner1 = association.get(Winner1Index);
-			winner1.addPay(5);
-			
-			winner2 = association.get(Winner2Index);
-			winner2.addPay(5);
-			
+			System.out.print("They were each fined $2.50.");
 			break;
 		}
-	}
-	
-	public Player getWinner1() {
-		return winner1;
-	}
-	
-	public Player getWinner2() {
-		return winner2;
 	}
 }

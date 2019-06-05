@@ -5,8 +5,8 @@ public class Player {
 
 	private String name = "";
 	private boolean gender;
-	private int cash, age, row, col;
-	private double rating;
+	private int age, row, col;
+	private double rating, cash;
 	
 	public Player() {
 		
@@ -53,19 +53,19 @@ public class Player {
 		return pixelDist * 3.1538;
 	}
 	
-	public void setSinglesRating(double newRate)
+	public void addSinglesRating(double newRate)
 	{
-		rating = newRate;
+		rating += newRate;
 	}
 	
-	public int getCash()
+	public double getCash()
 	{
 		return cash;
 	}
 	
-	public void addPay(int winnings)
+	public void addPay(double winnings)
 	{
-		cash = cash + winnings;
+		cash += winnings;
 	}
 	
 	public int getRow()
