@@ -85,8 +85,8 @@ public abstract class Match {
 			
 			directions = "To get there, head " + directions + " for " + dist + " miles.";
 		}	
-		System.out.print("\nYou will play at (" + playRow + ", " + playCol + "), on " + playTime);
-		System.out.print("\n" + directions);
+		System.out.print("\n     You will play at (" + playRow + ", " + playCol + "), on " + playTime);
+		System.out.print("\n     " + directions);
 	}
 	
 	public String directionsHelper(String op1, String op2, String op3, boolean positive, double slope) {
@@ -115,11 +115,11 @@ public abstract class Match {
 		
 		do {
 			if (! valid) {
-				System.out.println("Invalid input, try again.");
+				System.out.println("     Invalid input, try again.");
 			}
 			valid = true;
 				
-			System.out.print("\nOn what day do you want to play? (Ex: 4/22) ");
+			System.out.print("\n\n     On what day do you want to play? (Ex: 4/22) ");
 			playTime = userInput.nextLine().trim();
 				
 			if (playTime.length() < 3) {
@@ -146,11 +146,11 @@ public abstract class Match {
 		
 		do {
 			if (! valid) {
-				System.out.println("Invalid input, try again.");
+				System.out.println("     Invalid input, try again.");
 			}
 			valid = true;
 			
-			System.out.print("Do you want to play in the morning (M) or evening (E)? "); 
+			System.out.print("     Do you want to play in the morning (M) or evening (E)? "); 
 			userPlay = userInput.next().charAt(0);
 			
 		} while ((userPlay != 'M') && (userPlay != 'm') && (userPlay != 'E') && (userPlay != 'e'));
@@ -159,11 +159,11 @@ public abstract class Match {
 		
 		do {
 			if (! valid) {
-				System.out.println("Invalid input, try again.");
+				System.out.println("     Invalid input, try again.");
 			}
 			valid = true;
 			
-			System.out.print("Enter the time when you want to play: (Ex: 3:00) ");
+			System.out.print("     Enter the time when you want to play: (Ex: 3:00) ");
 			temp = userInput.next().trim();
 			
 			if (temp.length() < 4) {
@@ -223,12 +223,12 @@ public abstract class Match {
 			winner.addSinglesRating(0.1);
 			loser.addSinglesRating(-0.1);
 			
-			System.out.println("The new ratings:");
-			System.out.println("  " + winner.matchToString());
-			System.out.println("  " + loser.matchToString());
+			System.out.println(" The new ratings:");
+			System.out.println("       " + winner.matchToString());
+			System.out.println("       " + loser.matchToString());
 		}
 		else {
-			System.out.println("You ratings did not change.");
+			System.out.println("\n     Your ratings did not change.");
 		}
 		
 	}
@@ -243,14 +243,14 @@ public abstract class Match {
 			loser1.addSinglesRating(-0.1);
 			loser2.addSinglesRating(-0.1);
 			
-			System.out.println("The new ratings:");
-			System.out.println("  " + winner1.matchToString());
-			System.out.println("  " + winner2.matchToString());
-			System.out.println("  " + loser1.matchToString());
-			System.out.println("  " + loser2.matchToString());
+			System.out.println(" The new ratings:");
+			System.out.println("       " + winner1.matchToString());
+			System.out.println("       " + winner2.matchToString());
+			System.out.println("       " + loser1.matchToString());
+			System.out.println("       " + loser2.matchToString());
 		}
 		else {
-			System.out.println("Your ratings didn't change.");
+			System.out.println("\n     Your ratings didn't change.");
 		}
 	}
 	

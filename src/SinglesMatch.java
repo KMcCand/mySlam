@@ -15,7 +15,18 @@ public class SinglesMatch extends Match{
 		them = secondGuy;
 		association = theAssociation;
 		
-		System.out.print(firstGuy.matchToString() + " versus " + secondGuy.matchToString());
+		String line = firstGuy.matchToString() + " vs. " + secondGuy.matchToString();
+		
+		for (int n = 0; n < line.length(); n ++) {
+			System.out.print("-");
+		}
+		
+		System.out.println("\n" + line);
+		
+		for (int n = 0; n < line.length(); n ++) {
+			System.out.print("-");
+		}
+		
 		giveDirections(findRow(firstGuy, secondGuy), findCol(firstGuy, secondGuy), firstGuy);
 		
 		enterWinner();
@@ -26,11 +37,11 @@ public class SinglesMatch extends Match{
 		int userChoice = 4;
 		
 		do {
-			System.out.println("\n\n\nWhat was the outcome?");
-			System.out.println("  1 - They won");
-			System.out.println("  2 - You won");
-			System.out.println("  3 - They didn't show up");
-			System.out.println("  4 - You guys decided not to play");
+			System.out.println("\n\n\n     What was the outcome?");
+			System.out.println("       1 - They won");
+			System.out.println("       2 - You won");
+			System.out.println("       3 - They didn't show up");
+			System.out.println("       4 - You guys decided not to play");
 			
 			userChoice = userInput.nextInt();
 			
@@ -40,21 +51,21 @@ public class SinglesMatch extends Match{
 		
 		case 1:
 			addThePay(them, 5);
-			System.out.print("They have been given $5.00.");
+			System.out.print("     They have been given $5.00.");
 			changeRating(them, user);
 			
 			break;
 			
 		case 2:
 			addThePay(user, 5);
-			System.out.print("You have been given $5.00.");
+			System.out.print("     You have been given $5.00.");
 			changeRating(user, them);
 			
 			break;
 			
 		case 3:
 			addThePay(them, -5);
-			System.out.print("They have been fined $5.00.");
+			System.out.print("     They have been fined $5.00.");
 			break;
 		}
 	}

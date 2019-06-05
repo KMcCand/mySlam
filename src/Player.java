@@ -127,23 +127,26 @@ public class Player {
 					
 					if (! onePlayer.equals(myPartner)) {
 						
-						if (onePlayer.getGender() == gender) {
-					
-							double ratingDif = Math.abs(onePlayer.getSinglesRating() - medRating);
-							
-							if (ratingDif < minRatingDif) {
-								secondMinRatingDif = minRatingDif;
-								team2First = team2Second;
+						if (! onePlayer.equals(this)) {
+						
+							if (onePlayer.getGender() == gender) {
+						
+								double ratingDif = Math.abs(onePlayer.getSinglesRating() - medRating);
 								
-								minRatingDif = ratingDif;
-								team2Second = onePlayer;
+								if (ratingDif < minRatingDif) {
+									secondMinRatingDif = minRatingDif;
+									team2First = team2Second;
+									
+									minRatingDif = ratingDif;
+									team2Second = onePlayer;
+								}
 							}
 						}
 					}
 				}
 			}
 			
-			if (team2First.getName().equals(null) || team2Second.getName().equals(null)) {
+			if (team2First.getName().equals("") || team2Second.getName().equals("")) {
 				System.out.print("There are no teams in your area.");
 			}
 			else {
@@ -160,7 +163,7 @@ public class Player {
 		
 		Player myPartner = findRightPlayer(association, false, maxDist);
 		
-		if (myPartner.getName().equals(null)) {
+		if (myPartner.getName().equals("")) {
 			System.out.print("There are no partners in your area.");
 		}
 		else {
@@ -181,22 +184,25 @@ public class Player {
 					
 					if (! onePlayer.equals(myPartner)) {
 						
-						if (onePlayer.getGender() == gender) {
-					
-							double ratingDif = Math.abs(onePlayer.getSinglesRating() - rating);
-							
-							if (ratingDif < minRatingDif) {
-								team2First = onePlayer;
-								minRatingDif = ratingDif;
+						if (! onePlayer.equals(this)) {
+						
+							if (onePlayer.getGender() == gender) {
+						
+								double ratingDif = Math.abs(onePlayer.getSinglesRating() - rating);
+								
+								if (ratingDif < minRatingDif) {
+									team2First = onePlayer;
+									minRatingDif = ratingDif;
+								}
 							}
-						}
-						else {
-							
-							double ratingDif2 = Math.abs(onePlayer.getSinglesRating() - myPartner.getSinglesRating());
-							
-							if (ratingDif2 < minRatingDif2) {
-								team2Second = onePlayer;
-								minRatingDif2 = ratingDif2;
+							else {
+								
+								double ratingDif2 = Math.abs(onePlayer.getSinglesRating() - myPartner.getSinglesRating());
+								
+								if (ratingDif2 < minRatingDif2) {
+									team2Second = onePlayer;
+									minRatingDif2 = ratingDif2;
+								}
 							}
 						}
 					}

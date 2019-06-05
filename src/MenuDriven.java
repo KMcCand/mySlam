@@ -107,7 +107,6 @@ public class MenuDriven {
 			case 4:
 				System.out.print("How many dollars do you want to add: ");
 				user.addPay(userInput.nextInt());
-				//System.out.println();
 				
 				System.out.print("You now have $" + user.getCash() + ".");
 				break;
@@ -242,9 +241,10 @@ public class MenuDriven {
 		String name = dude.getName();
 		int index = 0;
 		
-		while ((index < association.size()) && (name.compareTo(association.get(index).getName()) > 0)) {
+		while (index < association.size() && (name.compareTo(association.get(index).getName()) > 0)) {
 			index ++;
 		}
+			
 		association.add(index, dude);	
 	}
 	
