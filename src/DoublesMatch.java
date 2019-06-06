@@ -47,7 +47,7 @@ public class DoublesMatch extends Match {
 			addThePay(them, 2.5);
 			addThePay(themPartner, 2.5);
 			
-			System.out.print("They have each been given $2.50.");
+			System.out.print("     They have each been given $2.50.");
 			changeRating(them, themPartner, user, userPartner);
 			
 			break;
@@ -56,7 +56,7 @@ public class DoublesMatch extends Match {
 			addThePay(user, 2.5);
 			addThePay(userPartner, 2.5);
 			
-			System.out.print("You have each been given $2.50.");
+			System.out.print("     You have each been given $2.50.");
 			changeRating(user, userPartner, them, themPartner);
 			
 			break;
@@ -65,7 +65,7 @@ public class DoublesMatch extends Match {
 			addThePay(them, -2.5);
 			addThePay(themPartner, -2.5);
 			
-			System.out.print("They were each fined $2.50.");
+			System.out.print("     They were each fined $2.50.");
 			break;
 		}
 	}

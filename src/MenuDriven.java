@@ -15,7 +15,7 @@ public class MenuDriven {
 		System.out.print("Generating players, please wait...");
 		
 		Scanner userInput = new Scanner(System.in);
-		generatePlayers(association);
+		generatePlayers();
 		
 		System.out.println("\n\nTo start off, enter your basic information\n-----------------------------------------------");
 		
@@ -38,15 +38,15 @@ public class MenuDriven {
 		
 
 		System.out.println("All the registered Players:\n\n");
-		printList(association);
+		printList();
 		System.out.println("\n-------------------------------------------------------------------");
 		
 		int userChoice;
 		
 		do {
 			do {
-				
-				System.out.println("\n\nWhat do you want to do:");
+
+				System.out.println("\n\n\nWhat do you want to do:");
 				System.out.println("	Play a Singles Match - (1)");
 				System.out.println("	Play a Doubles Match - (2)");
 				System.out.println("	Play a Mixed Doubles Match - (3)");
@@ -248,10 +248,9 @@ public class MenuDriven {
 		association.add(index, dude);	
 	}
 	
-	public static void generatePlayers(ArrayList<Player> association)
+	public static void generatePlayers()
 	{
-		Picture USMap = new Picture("images/USMap.jpg");		
-		
+		Picture USMap = new Picture("images/USMap.jpg");	
 		
 		// READ IN BOY NAMES
 		String pathname = "Male.txt"; 
@@ -285,7 +284,7 @@ public class MenuDriven {
 			System.out.println("*** Cannot open " + pathname + " ***");
 			System.exit(1);  // quit the program
 		} 
-
+		
 		while(femaleInput.hasNextLine()) {
 			
 				 
@@ -310,11 +309,10 @@ public class MenuDriven {
 		int lastCount = 0;
 		while(lastInput.hasNextLine()) {
 			
-			String lastName = lastInput.nextLine().toLowerCase();
-			lastName = Character.toUpperCase(lastName.charAt(0)) + lastName.substring(1);
+			String lastName = lastInput.nextLine();
 						
 			association.get(lastCount).addLastName(lastName);
-			association.get(1999-lastCount).addLastName(lastName);
+			association.get(1999 - lastCount).addLastName(lastName);
 			
 			lastCount++;
 		}
@@ -340,7 +338,7 @@ public class MenuDriven {
 		return new Player(name, gender, (rand.nextInt(38) + 12), 0, (rand.nextInt(13) * 0.5 + 1), row, col);
 	}
 	
-	public static void printList(ArrayList<Player> association)
+	public static void printList()
 	{
 		for(int n = 0; n < association.size(); n ++)
 		{
@@ -362,7 +360,7 @@ public class MenuDriven {
 			System.out.print("What is the name of your partner: ");
 			String partnerName = userInput.nextLine();
 			
-			index = findName(partnerName, association);
+			index = findName(partnerName);
 			
 		} while (index == -1);
 		
@@ -370,7 +368,7 @@ public class MenuDriven {
 	}
 
 
-	public static int findName(String findThisName, ArrayList<Player> association) {
+	public static int findName(String findThisName) {
 		int start = 0, end = association.size(), mid;
 	
 		while (start <= end) {

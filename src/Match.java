@@ -213,7 +213,7 @@ public abstract class Match {
 	
 	public void addThePay(Player guy, double payAmount) {
 		
-		association.get(MenuDriven.findName(guy.getName(), association)).addPay(payAmount);
+		association.get(MenuDriven.findName(guy.getName())).addPay(payAmount);
 	}
 	
 	public void changeRating(Player winner, Player loser) {

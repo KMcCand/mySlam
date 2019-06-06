@@ -38,7 +38,8 @@ public class Player {
 	
 	public void addLastName(String last)
 	{
-		name = name + " " + last;
+		name = name + " " + Character.toUpperCase(last.charAt(0)) + last.substring(1).toLowerCase();
+		
 	}
 	
 	public double distanceMiles(Player p2) {
