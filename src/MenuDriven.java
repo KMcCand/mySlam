@@ -268,9 +268,7 @@ public class MenuDriven {
 		} 
 
 		while(maleInput.hasNextLine()) {
-			
-			String name = maleInput.nextLine();
-			addPlayer(makeRandPlayer(name, USMap, true));
+			addPlayer(makeRandPlayer(maleInput.nextLine(), USMap, true));
 		}
 		
 		
@@ -290,8 +288,8 @@ public class MenuDriven {
 
 		while(femaleInput.hasNextLine()) {
 			
-			String name = femaleInput.nextLine();	 
-			addPlayer(makeRandPlayer(name, USMap, false));		
+				 
+			addPlayer(makeRandPlayer(femaleInput.nextLine(), USMap, false));		
 		}
 			
 		
@@ -339,10 +337,7 @@ public class MenuDriven {
 					
 		} while(legit == false);
 				
-		double rating = rand.nextInt(13) * 0.5 + 1;
-		int age = rand.nextInt(38) + 12;
-		
-		return new Player(name, gender, age, 0, rating, col, row);
+		return new Player(name, gender, (rand.nextInt(38) + 12), 0, (rand.nextInt(13) * 0.5 + 1), row, col);
 	}
 	
 	public static void printList(ArrayList<Player> association)

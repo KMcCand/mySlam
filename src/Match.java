@@ -258,4 +258,17 @@ public abstract class Match {
 		return ((first.getSinglesRating() + second.getSinglesRating()) / 2);
 	}
 	
+	public void printHeader(String header) {
+		
+		for (int n = 0; n < header.length(); n ++) {
+			System.out.print("-");
+		}
+		
+		System.out.println("\n" + header);
+		
+		for (int n = 0; n < header.length(); n ++) {
+			System.out.print("-");
+		}
+	}
+	
 }

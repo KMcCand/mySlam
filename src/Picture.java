@@ -599,6 +599,7 @@ public class Picture extends SimplePicture
   
   
   public static boolean testColor(int row, int col, Picture testImage, boolean generating) {
+	  
 	  Pixel[][] array = testImage.getPixels2D();
 	  Pixel selected = array[row][col];
 	  

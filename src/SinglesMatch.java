@@ -16,16 +16,7 @@ public class SinglesMatch extends Match{
 		association = theAssociation;
 		
 		String line = firstGuy.matchToString() + " vs. " + secondGuy.matchToString();
-		
-		for (int n = 0; n < line.length(); n ++) {
-			System.out.print("-");
-		}
-		
-		System.out.println("\n" + line);
-		
-		for (int n = 0; n < line.length(); n ++) {
-			System.out.print("-");
-		}
+		printHeader(line);
 		
 		giveDirections(findRow(firstGuy, secondGuy), findCol(firstGuy, secondGuy), firstGuy);
 		
