@@ -243,11 +243,9 @@ public class MenuDriven {
 	
 	
 	public static void addPlayer(Player dude) {
-		
-		String name = dude.getName();
 		int index = 0;
 		
-		while (index < association.size() && (name.compareTo(association.get(index).getName()) > 0)) {
+		while (index < association.size() && (dude.getName().compareTo(association.get(index).getName()) > 0)) {
 			index ++;
 		}
 			
@@ -313,7 +311,7 @@ public class MenuDriven {
 		int lastCount = 0;
 		while(lastInput.hasNextLine()) {
 			
-			String lastName = lastInput.nextLine();
+			String lastName = lastInput.nextLine().trim();
 						
 			association.get(lastCount).addLastName(lastName);
 			association.get(2001 - lastCount).addLastName(lastName);
@@ -342,13 +340,13 @@ public class MenuDriven {
 					
 		} while(legit == false);
 				
-		return new Player(name, gender, (rand.nextInt(38) + 12), 0, (rand.nextInt(13) * 0.5 + 1), row, col);
+		return new Player(name.trim(), gender, (rand.nextInt(38) + 12), 0, (rand.nextInt(13) * 0.5 + 1), row, col);
 	}
 	
 	public static void printList()
 	{
 		for (int n = 0; n < association.size(); n ++){
-			System.out.println(n + " " + association.get(n).toString());
+			System.out.println(n + " " + association.get(n));
 		}
 	}
 	

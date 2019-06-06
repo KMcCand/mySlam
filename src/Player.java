@@ -11,8 +11,7 @@ public class Player {
 		
 	}
 	
-	public Player(String tname, boolean theGender, int tage, int tcash, double tsrating, int theRow, int theCol)
-	{
+	public Player(String tname, boolean theGender, int tage, int tcash, double tsrating, int theRow, int theCol) {
 		name = tname;
 		gender = theGender;
 		age = tage;
@@ -22,12 +21,10 @@ public class Player {
 		col = theCol;
 	}
 	
-	public String getName()
-	{
+	public String getName() {
 		return name;
 	}
-	public double getSinglesRating()
-	{
+	public double getSinglesRating() {
 		return rating;	
 	}
 	
@@ -35,10 +32,8 @@ public class Player {
 		return gender;
 	}
 	
-	public void addLastName(String last)
-	{
-		name = name + " " + Character.toUpperCase(last.charAt(0)) + last.substring(1).toLowerCase();
-		
+	public void addLastName(String last) {
+		name = name + " " + Character.toUpperCase(last.charAt(0)) + last.substring(1).toLowerCase();	
 	}
 	
 	public double distanceMiles(Player p2) {
@@ -84,7 +79,7 @@ public class Player {
 	
 	public String toString() {
 		// NOTE TO US: THE QUESTION MARK IS A LESS CODE WAY TO SAY MALE IF GENDER IS TRUE, FEMALE IF FALSE
-		return name + ", " + ((gender) ? 'M' : 'F') + " |  " + age + " years old, " + cash + " dollars. Rating: " + rating;
+		return name + ", " + (gender ? 'M' : 'F') + " |  " + age + " years old, " + cash + " dollars. Rating: " + rating;
 	}
 	
 	public void makeSinglesMatch(ArrayList<Player> association, double maxDist) {

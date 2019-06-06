@@ -41,15 +41,15 @@ public abstract class Match {
 		if (colDif == 0) {
 			
 			if (rowDif == 0) {
-				directions = "You're already at the courts!";
+				directions = "You already live there.";
 			}
 			
 			else {
 				if (rowDif > 0) {
-					directions = "To get there, head north for " + dist + " miles.";
+					directions = "To get there, drive north for " + dist + " miles.";
 				}
 				else {
-					directions = "To get there, head south for " + dist + " miles.";
+					directions = "To get there, drive south for " + dist + " miles.";
 				}
 			}
 		}
@@ -57,10 +57,10 @@ public abstract class Match {
 		else if (rowDif == 0) {
 			
 			if (colDif > 0) {
-				directions = "To get there, head east for " + dist + " miles.";
+				directions = "To get there, drive east for " + dist + " miles.";
 			}
 			else {
-				directions = "To get there, head west for " + dist + " miles.";
+				directions = "To get there, drive west for " + dist + " miles.";
 			}
 		}
 		
@@ -83,7 +83,7 @@ public abstract class Match {
 				directions = directionsHelper("south", "south west", "west", true, slope);
 			}
 			
-			directions = "To get there, head " + directions + " for " + dist + " miles.";
+			directions = "To get there, drive " + directions + " for " + dist + " miles.";
 		}	
 		System.out.print("\n     You will play at (" + playRow + ", " + playCol + "), on " + playTime);
 		System.out.print("\n     " + directions);
