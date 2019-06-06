@@ -115,11 +115,11 @@ public abstract class Match {
 		
 		do {
 			if (! valid) {
-				System.out.println("     Invalid input, try again.");
+				System.out.print("     Invalid input, try again. ");
 			}
 			valid = true;
 				
-			System.out.print("\n\n     On what day do you want to play? (Ex: 4/22) ");
+			System.out.print("     On what day do you want to play? (Ex: 4/22) ");
 			playTime = userInput.nextLine().trim();
 				
 			if (playTime.length() < 3) {
@@ -269,6 +269,8 @@ public abstract class Match {
 		for (int n = 0; n < header.length(); n ++) {
 			System.out.print("-");
 		}
+		
+		System.out.println("\n");
 	}
 	
 }

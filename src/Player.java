@@ -1,4 +1,3 @@
-//package mySlam;
 import java.util.ArrayList;
 
 public class Player {
@@ -210,7 +209,7 @@ public class Player {
 				}
 			}
 			
-			if (team2First.getName().equals(null) || team2Second.getName().equals(null)) {
+			if (team2First.getName().equals("") || team2Second.getName().equals("")) {
 				System.out.print("There are no teams in your area.");
 			}
 			else {

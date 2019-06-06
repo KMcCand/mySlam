@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Random;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
+import java.util.List;
 
 public class MenuDriven {
 	
@@ -147,11 +149,15 @@ public class MenuDriven {
 		
 		} while (! valid);
 		
-		name.toLowerCase();
-		Character.toUpperCase(name.charAt(0));
-		Character.toUpperCase(name.charAt(name.indexOf(' ') + 1));
+		// Format the name, capitalize first letter of first and last
+		return formatName(name);
+	}
+	
+	public static String formatName(String name) {
+		name = name.toLowerCase();
+		int spacePos = name.indexOf(' ');
 		
-		return name;
+		return Character.toUpperCase(name.charAt(0)) + name.substring(1, spacePos + 1) + Character.toUpperCase(name.charAt(spacePos + 1)) + name.substring(spacePos + 2);
 	}
 	
 	public static int genderInput() {
@@ -285,9 +291,7 @@ public class MenuDriven {
 			System.exit(1);  // quit the program
 		} 
 		
-		while(femaleInput.hasNextLine()) {
-			
-				 
+		while(femaleInput.hasNextLine()) { 
 			addPlayer(makeRandPlayer(femaleInput.nextLine(), USMap, false));		
 		}
 			
@@ -312,12 +316,15 @@ public class MenuDriven {
 			String lastName = lastInput.nextLine();
 						
 			association.get(lastCount).addLastName(lastName);
-			association.get(1999 - lastCount).addLastName(lastName);
+			association.get(2001 - lastCount).addLastName(lastName);
 			
 			lastCount++;
 		}
+		
+		//Remove the last two Players
+		association.remove(association.size() - 1);
+		association.remove(association.size() - 1);
 	}
-
 	
 	public static Player makeRandPlayer(String name, Picture USMap, boolean gender) {
 		Random rand = new Random();
@@ -340,12 +347,10 @@ public class MenuDriven {
 	
 	public static void printList()
 	{
-		for(int n = 0; n < association.size(); n ++)
-		{
+		for (int n = 0; n < association.size(); n ++){
 			System.out.println(n + " " + association.get(n).toString());
 		}
 	}
-	
 	
 	public static Player getPartnerFromName() {
 		Scanner userInput = new Scanner (System.in);
