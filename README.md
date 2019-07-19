@@ -1,2 +1,2 @@
 # mySlam
-Vir and Kyle Tennis Matchmaker Computer Science Final 
+Vir and Kyle Tennis Matchmaker Computer Science Project 
